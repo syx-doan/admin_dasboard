@@ -48,7 +48,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Trang chủ</span></a>
             </li>
 
             <!-- Divider -->
@@ -288,7 +288,8 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -299,7 +300,8 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -310,7 +312,8 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -341,8 +344,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Quang Hà</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -382,135 +386,13 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex flex-column">
-                            <h6 class="m-0 font-weight-bold text-primary">Tài khoản</h6>
-                            <div>
-                                <button class="btn btn-primary mt-2">Thêm</button>
-                                <form
-                                class="pl-5 d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                        aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                                
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="tableId" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Tài khoản</th>
-                                            <th>Mật khẩu</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>Vai trò</th>
-                                            <th>Address</th>
-                                            <th>Action</th>
-                                          
-                                        </tr>
-                                    </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot> -->
-                                    <tbody>
-                                        <tr>
-                                            <td>Nguyễn Thái Quang Hà</td>
-                                            <td>quangha</td>
-                                            <td>123123</td>
-                                            <td>0912353442</td>
-                                            <td>quangha@gmail.com</td>
-                                            <td>Admin</td>
-                                            <td>Quảng Nam</td>
-                                            <td>
-                                                <a style="color:red ;" href="">   <i class="fa fa-trash"> xóa</i></a>
-                                                -
-                                               <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                                              </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Đoàn Viết Sỹ</td>
-                                            <td>vietsy</td>
-                                            <td>123123</td>
-                                            <td>018027887</td>
-                                            <td>vietsy@gmail.com</td>
-                                            <td>Admin</td>
-                                            <td>Quảng Bình</td>
-                                            <td>
-                                                <a style="color:red ;" href="">   <i class="fa fa-trash"> xóa</i></a>
-                                                -
-                                               <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                                              </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nguyễn Nguyên Thanh</td>
-                                            <td>nguyenthanh</td>
-                                            <td>123123</td>
-                                            <td>0912353442</td>
-                                            <td>nguyenthanh@gmail.com</td>
-                                            <td>Admin</td>
-                                            <td>Quảng Nam</td>
-                                            <td>
-                                                <a style="color:red ;" href="">   <i class="fa fa-trash"> xóa</i></a>
-                                                -
-                                               <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                                              </td>
-                                              
-                                        </tr>
-                                        <tr>
-                                            <td>Trịnh Thế Thịnh</td>
-                                            <td>thethinh</td>
-                                            <td>123123</td>
-                                            <td>0912353442</td>
-                                            <td>thethinh@gmail.com</td>
-                                            <td>Admin</td>
-                                            <td>Đăk Lăk</td>
-                                            <td>
-                                                <a style="color:red ;" href="">   <i class="fa fa-trash"> xóa</i></a>
-                                                -
-                                               <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                                              </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Huynh Thị Mỹ Hảo</td>
-                                            <td>myhao</td>
-                                            <td>123123</td>
-                                            <td>0912353442</td>
-                                            <td>myhao@gmail.com</td>
-                                            <td>Admin</td>
-                                            <td>Đà Nẵng</td>
-                                            <td>
-                                                <a style="color:red ;" href="">   <i class="fa fa-trash"> xóa</i></a>
-                                                -
-                                               <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                                              </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+
+
+                </div>
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- End of Main Content -->
+            <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -522,8 +404,8 @@
             </footer>
             <!-- End of Footer -->
 
-    </div>
-    <!-- End of Content Wrapper -->
+        </div>
+        <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->

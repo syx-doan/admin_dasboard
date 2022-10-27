@@ -2,80 +2,48 @@
     <div class="card-header py-3 d-flex flex-column">
         <h6 class="m-0 font-weight-bold text-primary">Thương hiệu</h6>
         <div class="d-flex ">
-            <button class="btn btn-primary mt-2">Thêm</button>
+            <a href="index.php?act=add-thuonghieu"><button class="btn btn-primary mt-2">Thêm</button></a>
         </div>
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="" width="100%" cellspacing="0" >
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>Image</th>
                         <th>Name</th>
-                        <th>Acction</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
-                <!-- <tfoot>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Name</th>
-                                            <th>Acction</th>
-                                        </tr>
-                                    </tfoot> -->
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Ảnh</td>
-                        <td>Sony</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
+                <?php 
+                foreach($listbrand as $brand){
+                    extract($brand);
+                    $xoath="index.php?act=xoath&id=".$id_brand;
+                    $suath="index.php?act=suath&id=".$id_brand;
+                    $img = "./upload/thuonghieu/".$image_brand;
+                    if(is_file($img)){
+                      $image_brand = "<img src='".$img."' height='80px'>";
+                    }else{
+                      $image_brand ="NO IMAGES";
+                    }
+                     echo ' 
+                     <tbody style="align-item:center;">
+                     <tr >
+                         <td>'.$id_brand.'</td>
+                         <td>'.$image_brand.'</td>
+                         <td>'.$name_brand.'</td>
+                         <td>
+                            <a style="color:green ;" href="'.$suath.'"> <i class="fa fa-pen">sửa</i></a>
                             -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
+                            <a style="color:red ;" href="'.$xoath.'"> <i class="fa fa-trash"> xóa</i></a>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Ảnh</td>
-                        <td>Toshiba</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ảnh</td>
-                        <td>Panasonic</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Ảnh</td>
-                        <td>Asanzo</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Ảnh</td>
-                        <td>LG</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                </tbody>
+                     </tr>
+                     </tbody>
+                     ';
+                    }
+                ?>
             </table>
         </div>
         <nav aria-label="Page navigation example " class="float-right">

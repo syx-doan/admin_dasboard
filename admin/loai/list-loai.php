@@ -2,7 +2,7 @@
     <div class="card-header py-3 d-flex flex-column">
         <h6 class="m-0 font-weight-bold text-primary">Loại hàng</h6>
         <div>
-            <button class="btn btn-primary mt-2">Thêm</button>
+            <a href="index.php?act=add-loai"><button class="btn btn-primary mt-2">Thêm</button></a>
         </div>
     </div>
 
@@ -16,60 +16,26 @@
                         <th>Acction</th>
                     </tr>
                 </thead>
-                <!-- <tfoot>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Name</th>
-                                            <th>Acction</th>
-                                        </tr>
-                                    </tfoot> -->
-                <tbody>
+                <?php foreach ($listloai as $loai) {
+               extract($loai);
+               $xoal="index.php?act=xoal&id=".$id_category;
+               $sual="index.php?act=sual&id=".$id_category;
+               echo '
+               <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Tivi</td>
+                        <td>'.$id_category.'</td>
+                        <td>'.$name.'</td>
                         <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
+                            <a style="color:green ;" href="'.$sual.'"> <i class="fa fa-pen">sửa</i></a>
                             -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Tủ Lạnh</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Máy giặt</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Máy điều hòa</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Quạt</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
+                            <a style="color:red ;" href="'.$xoal.'"> <i class="fa fa-trash"> xóa</i></a>
                         </td>
                     </tr>
                 </tbody>
+               ';
+    }
+    ?>
+                
             </table>
         </div>
         <nav aria-label="Page navigation example " class="float-right">

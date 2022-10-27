@@ -1,7 +1,5 @@
 <?php
-require_once ('connect.php');
-$sql = "SELECT * from users";
-$result = $connect ->query($sql);
+
 ?>
 
 <!-- DataTales Example -->
@@ -10,12 +8,12 @@ $result = $connect ->query($sql);
         <h6 class="m-0 font-weight-bold text-primary">Tài khoản</h6>
         <div>
             <a href="index.php?act=add-taikhoan"><button class="btn btn-primary mt-2">Thêm</button></a>
-            <form class="pl-5 d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <form action="index.php?act=search" method="POST" class="pl-5 d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                    <input type="text" name="kyw" class="form-control bg-light border-0 small" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="submit" name="search">
                             <i class="fas fa-search fa-sm"></i>
                         </button>
                     </div>
@@ -46,9 +44,9 @@ $result = $connect ->query($sql);
          $xoatk="index.php?act=xoatk&id=".$id_user;
          $suatk="index.php?act=suatk&id=".$id_user;
          if($role == 1){
-            echo "Admin";
+            $role = 'Admin';
           }else{
-              echo "Khách hàng" ;
+              $role =  "Khách hàng" ;
           }
           echo '
           <tbody>

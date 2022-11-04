@@ -94,8 +94,8 @@ include './connect.php';
         case 'updatel' :
                 if(isset($_POST['btnUpdateloai'])){
                 $id_category = $_POST['id'];    
-                $name = $_POST['inputName'];
-                        update_category($id_category,$name);
+                $name_category = $_POST['inputName'];
+                        update_category($id_category,$name_category);
                         echo '<script>alert("Update thành công")</script>';
                 }
                 $listloai = load_all_category();    
@@ -208,7 +208,10 @@ include './connect.php';
                 break;
         case 'suasp' :
                 if(isset($_GET['id'])&& ($_GET['id'])>0) {
-                                $sanpham =load_one_sanpham($_GET['id']);
+                                // $sanpham =load_one_sanpham($_GET['id']);
+                             $id_product = $_GET['id'];
+                             $sanpham = mysqli_query($connect,"SELECT * from products where id_product = $id_product");
+                             $data = mysqli_fetch_assoc($sanpham);
                 }
                 $listloai = load_all_category();
                 $listbrand = load_all_thuonghieu();   
@@ -231,27 +234,46 @@ include './connect.php';
                         $price = $_POST['inputPrice'];
                         $quantity = $_POST['inputQuantity'];
                         $description = $_POST['inputDescription'];
+                           
+                        // echo "<pre>";
+                        // print_r($_FILES);
+                        // var_dump(empty($_FILES['inputImage']['name']));
+                        // die();
+
+                        // ảnh chính
                         if(isset($_FILES['inputImage'])){
                                $file = $_FILES['inputImage'];
                                $file_name = $file['name'];
-                               move_uploaded_file($file['tmp_name'],'./upload/product/'.$file_name);
+                               $old_image = $_POST['old_image'];
+                        //        var_dump($file['size']);die();
+                               if(empty($file_name)) {
+                                $image = $old_image;
+                               }else{
+                                move_uploaded_file($file['tmp_name'],'./upload/product/'.$file_name);
+                               }
+                               
                         }
+                        // ảnh mô tả
                         if(isset($_FILES['inputImageMT'])){
                                 $files = $_FILES['inputImageMT'];
                                 $file_names = $files['name'];
-                                foreach($file_names as $key => $value){
+                                if(!empty($file_names[0])) {
+                                  mysqli_query($connect,"DELETE  from product_image where id_product=$id_product");
+                                //   die(); 
+                                  foreach($file_names as $key => $value){
                                         move_uploaded_file($files['tmp_name'][$key],'./upload/product/'.$value);
                                 }
+                                foreach($file_names as $key => $value) {
+                                        mysqli_query($connect,"INSERT INTO product_image(id_product,image) VALUES('$id_product','$value')");
+                                }
+                                }
+                                
                          }
-                        //  die();
                         $sql="UPDATE products set name='$name', category_id = '$category_id', brand_id='$brand_id',image='$image',price='$price',quantity='$quantity',description='$description' where id_product=$id_product" ;
                                $query = mysqli_query($connect,$sql);
-                               $id_product = mysqli_insert_id($connect);
-                        //        var_dump($id_product);die();
-                        var_dump($sql);
-                        foreach($file_names as $key => $value) {
-                                mysqli_query($connect,"UPDATE product_image set id_product='$id_product',image='$value')");
-                        }
+                        //        $id_product = mysqli_insert_id($connect);
+                        // var_dump($sql);die();
+                        
                                 echo '<script>alert("sửa thành công");location="index.php?act=sanpham";</script>';  
                 }
                 break;          

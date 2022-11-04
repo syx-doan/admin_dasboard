@@ -38,7 +38,7 @@ require './connect.php';
                 if(is_file($img)){
                   $image = "<img src='".$img."' height='80px'>";
                 }else{
-                  $image ="NO IMAGES";
+                  $image =" <img src='".$img."' height='80px'> NO IMAGES";
                 }
                 echo '
                 <tbody>

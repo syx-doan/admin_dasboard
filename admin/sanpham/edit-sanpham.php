@@ -1,6 +1,6 @@
 <?php 
-    if (is_array($sanpham)) {
-        extract($sanpham);
+    if (is_array($data)) {
+        extract($data);
     }
     $img = "./upload/product/".$image;
     if(is_file($img)){
@@ -61,11 +61,12 @@
         </div>
         <div class="form-group">
             <label for="inputEmail">Ảnh</label>
-            <input type="file" class="form-control" name="inputImage" required><?=$image?>
+            <input type="hidden" name="old_image" id="" value="<?php echo $data['image'] ?>">
+            <input type="file" class="form-control" name="inputImage" value="" ><?=$image?>
         </div>
         <div class="form-group" >
             <label for="inputEmail">Ảnh mô tả</label>
-            <input type="file" class="form-control" name="inputImageMT[]" multiple="multiple" >
+            <input type="file" class="form-control" name="inputImageMT[]" multiple="multiple"  >
            
                 <div class="" style="display:flex;">
                 <?php foreach($img_pro as $key => $value){ ?>

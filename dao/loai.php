@@ -1,6 +1,6 @@
 <?php
-function insert_category($name){
-    $sql="INSERT INTO category(name_category) values('$name')";
+function insert_category($name_category){
+    $sql="INSERT INTO category(name_category) values('$name_category')";
     pdo_execute($sql);
 }
 function delete_category($id_category ){
@@ -17,9 +17,9 @@ function load_one_category($id_category ){
     $id_category=pdo_query_one($sql);
     return $id_category;
 }
-function update_category($id_category,$name){
-    $sql="UPDATE category set name='".$name."' where id_category =".$id_category ;
-    var_dump($sql);
+function update_category($id_category,$name_category){
+    $sql="UPDATE category set name_category='".$name_category."' where id_category =".$id_category ;
+    // var_dump($sql);
     pdo_execute($sql);
 }
 

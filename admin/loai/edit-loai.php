@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <label for="inputName">Tên</label>
-            <input type="text" class="form-control" name="inputName" value="<?=$name?>" required>
+            <input type="text" class="form-control" name="inputName" value="<?=$name_category?>" required>
         </div>
         <input type="hidden" name="id" value="<?php if(isset($id_category)&&($name!="")) echo $id_category;?>">
         <button type="submit" name="btnUpdateloai" class="btn btn-primary">Update</button>

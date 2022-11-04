@@ -2,8 +2,9 @@
 include './dao/pdo.php';
 include './dao/loai.php';
 include './dao/thuonghieu.php';
-// include './dao/hang-hoa.php';
+include './dao/sanpham.php';
 include './dao/taikhoan.php';
+include './connect.php';
 // include './dao/thong-ke.php';
 // include './dao/binh-luan.php';
     if(isset($_GET['act'])){
@@ -71,8 +72,8 @@ include './dao/taikhoan.php';
                 break;
         case 'add-loai':
                 if(isset($_POST['btnAddloai'])){
-                        $name = $_POST['inputName'];
-                        insert_category($name);
+                        $name_category = $_POST['inputName'];
+                        insert_category($name_category);
                         echo '<script>alert("Thêm thành công");location="index.php?act=loai";</script>';
                         }
                 include './admin/loai/add-loai.php';
@@ -165,8 +166,95 @@ include './dao/taikhoan.php';
         
         // sản phẩm
         case 'sanpham':
+                $listsanpham = load_sanpham();
                 include './admin/sanpham/list-sanpham.php';
                 break;
+        case 'add-sanpham':
+                if(isset($_POST['btnAddSanpham'])){
+                        $name = $_POST['inputName'];
+                        $category_id = $_POST['inputLoai'];
+                        $brand_id = $_POST['inputThuonghieu'];
+                        $image = $_FILES['inputImage']['name'];
+                        $price = $_POST['inputPrice'];
+                        $quantity = $_POST['inputQuantity'];
+                        $description = $_POST['inputDescription'];
+                        if(isset($_FILES['inputImage'])){
+                               $file = $_FILES['inputImage'];
+                               $file_name = $file['name'];
+                               move_uploaded_file($file['tmp_name'],'./upload/product/'.$file_name);
+                        }
+                        if(isset($_FILES['inputImageMT'])){
+                                $files = $_FILES['inputImageMT'];
+                                $file_names = $files['name'];
+                                foreach($file_names as $key => $value){
+                                        move_uploaded_file($files['tmp_name'][$key],'./upload/product/'.$value);
+                                }
+                         }
+                        //  die();
+                        $sql="INSERT INTO products(name,category_id,brand_id,image,price,quantity,description) values('$name','$category_id','$brand_id','$image','$price','$quantity','$description')";
+                               $query = mysqli_query($connect,$sql);
+                               $id_product = mysqli_insert_id($connect);
+                        //        var_dump($id_product);die();
+                        foreach($file_names as $key => $value) {
+                                mysqli_query($connect,"INSERT INTO product_image(id_product,image) VALUES('$id_product','$value')");
+                        }
+                                echo '<script>alert("Thêm thành công");location="index.php?act=sanpham";</script>';
+                }
+                     
+                     
+                      $listloai = load_all_category();
+                      $listbrand = load_all_thuonghieu();
+                include './admin/sanpham/add-sanpham.php';         
+                break;
+        case 'suasp' :
+                if(isset($_GET['id'])&& ($_GET['id'])>0) {
+                                $sanpham =load_one_sanpham($_GET['id']);
+                }
+                $listloai = load_all_category();
+                $listbrand = load_all_thuonghieu();   
+                include './admin/sanpham/edit-sanpham.php';
+                break;  
+        case 'xoasp' :
+                if(isset($_GET['id'])&&($_GET['id'] > 0)){
+                        delete_sanpham($_GET['id']);
+                }
+                $listsanpham = load_sanpham(); 
+                include './admin/sanpham/list-sanpham.php';
+                break;  
+        case 'updatesp':
+                if(isset($_POST['btnUpdateSanpham'])){
+                        $id_product = $_POST['id'];
+                        $name = $_POST['inputName'];
+                        $category_id = $_POST['inputLoai'];
+                        $brand_id = $_POST['inputThuonghieu'];
+                        $image = $_FILES['inputImage']['name'];
+                        $price = $_POST['inputPrice'];
+                        $quantity = $_POST['inputQuantity'];
+                        $description = $_POST['inputDescription'];
+                        if(isset($_FILES['inputImage'])){
+                               $file = $_FILES['inputImage'];
+                               $file_name = $file['name'];
+                               move_uploaded_file($file['tmp_name'],'./upload/product/'.$file_name);
+                        }
+                        if(isset($_FILES['inputImageMT'])){
+                                $files = $_FILES['inputImageMT'];
+                                $file_names = $files['name'];
+                                foreach($file_names as $key => $value){
+                                        move_uploaded_file($files['tmp_name'][$key],'./upload/product/'.$value);
+                                }
+                         }
+                        //  die();
+                        $sql="UPDATE products set name='$name', category_id = '$category_id', brand_id='$brand_id',image='$image',price='$price',quantity='$quantity',description='$description' where id_product=$id_product" ;
+                               $query = mysqli_query($connect,$sql);
+                               $id_product = mysqli_insert_id($connect);
+                        //        var_dump($id_product);die();
+                        var_dump($sql);
+                        foreach($file_names as $key => $value) {
+                                mysqli_query($connect,"UPDATE product_image set id_product='$id_product',image='$value')");
+                        }
+                                echo '<script>alert("sửa thành công");location="index.php?act=sanpham";</script>';  
+                }
+                break;          
         case 'donhang':
                 include './admin/donhang/list-donhang.php';
                 break;

@@ -18,7 +18,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword">Mật khẩu</label>
-                <input type="password" class="form-control" name="inputPassword" placeholder="Mật khẩu" required>
+                <input type="password" class="form-control" name="inputPassword" placeholder="Mật khẩu"   required >
             </div>
         </div>
         <div class="form-group">

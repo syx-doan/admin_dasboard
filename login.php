@@ -1,3 +1,11 @@
+<?php 
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    echo $email . $password;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,17 +48,18 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="d-flex align-items-center mb-3 pb-1">
-                                       <img src="https://cdn.discordapp.com/attachments/1026521114584825916/1028160326153273396/logo-shop-red.png" alt="">
-                                       
-                                      </div>
-                                    <form class="user">
+                                        <img src="https://cdn.discordapp.com/attachments/1026521114584825916/1028160326153273396/logo-shop-red.png"
+                                            alt="">
+
+                                    </div>
+                                    <form action="login.php" class="user" method="POST">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input name="email"type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input name="password" type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <div class="form-group">
@@ -60,9 +69,12 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <button type="submit" name="login" class="btn btn-primary btn-user btn-block"> 
+                                          
+                                                Login
+                                            
+                                        </button>
+
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google

@@ -24,7 +24,7 @@
                <tbody>
                     <tr>
                         <td>'.$id_category.'</td>
-                        <td>'.$name.'</td>
+                        <td>'.$name_category.'</td>
                         <td>
                             <a style="color:green ;" href="'.$sual.'"> <i class="fa fa-pen">sửa</i></a>
                             -

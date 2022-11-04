@@ -1,6 +1,6 @@
 <?php
 function insert_category($name){
-    $sql="INSERT INTO category(name) values('$name')";
+    $sql="INSERT INTO category(name_category) values('$name')";
     pdo_execute($sql);
 }
 function delete_category($id_category ){

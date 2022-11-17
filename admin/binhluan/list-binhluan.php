@@ -17,48 +17,24 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <!-- <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot> -->
-                <tbody>
+                <?php foreach($listcomment as $comment){
+                    extract($comment);
+                    echo '
+                    <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1/10/2022</td>
-                        <td>sản phẩm ok</td>
-                        <td>
-                            <a href=""> <i class="fa fa-toggle-on">Ẩn</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>5/10/2022</td>
-                        <td>sản phẩm ok</td>
-                        <td>
-                            <a href=""> <i class="fa fa-toggle-on">Ẩn</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>7/10/2022</td>
-                        <td>sản phẩm ok</td>
+                        <td>'.$id_comment.'</td>
+                        <td>'.$id_user.'</td>
+                        <td>'.$id_product.'</td>
+                        <td>'.$ngaybinhluan.'</td>
+                        <td>'.$comment.'</td>
                         <td>
                             <a href=""> <i class="fa fa-toggle-on">Ẩn</i></a>
                         </td>
                     </tr>
                 </tbody>
+                    ';
+                } ?>
+
             </table>
         </div>
         <nav aria-label="Page navigation example " class="float-right">

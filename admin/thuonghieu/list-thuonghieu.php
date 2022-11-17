@@ -1,3 +1,21 @@
+<?php 
+$brand = mysqli_query($connect,"SELECT * from brand");
+// 1 tính tổng bảng ghi của bảng
+$total = mysqli_num_rows($brand);
+// var_dump($total);
+// 2 thiết lập số bảng ghi trong 1 trang
+$row = 5;
+// 3 tính số trang
+$pages = ceil($total/$row);
+// var_dump($pages);
+if (isset($_GET['paget'])) {
+    $page = $_GET['paget'];
+}else{
+    $page = 1 ; 
+}
+$from = ($pages - 1) * $row; 
+$sql = mysqli_query($connect,"SELECT * from brand order by id_brand  limit $from,$row");
+?>
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-column">
         <h6 class="m-0 font-weight-bold text-primary">Thương hiệu</h6>
@@ -49,9 +67,9 @@
         <nav aria-label="Page navigation example " class="float-right">
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <?php  for($i=1;$i<=$pages;$i++){?>
+                <li class="page-item"><a class="page-link" href="index.php?paget=<?php echo $i?>"><?php echo $i ?></a></li>
+                <?php } ?>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </nav>

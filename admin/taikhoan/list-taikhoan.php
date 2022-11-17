@@ -1,5 +1,24 @@
 <?php
+$users = mysqli_query($connect,"SELECT * from users");
 
+// 1 tính tổng bảng ghi của bảng
+$total = mysqli_num_rows($users);
+// var_dump($total);
+
+// 2 thiết lập số bảng ghi trong 1 trang
+$row = 5;
+
+// 3 tính số trang
+$pages = ceil($total/$row);
+// var_dump($pages);
+
+if (isset($_GET['pagel'])) {
+    $page = $_GET['pagel'];
+}else{
+    $page = 1 ; 
+}
+$from = ($pages - 1) * $row; 
+$sql = mysqli_query($connect,"SELECT * from users order by id_user  limit $from,$row");
 ?>
 
 <!-- DataTales Example -->
@@ -75,9 +94,9 @@
         <nav aria-label="Page navigation example " class="float-right">
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <?php for($i=1;$i<=$pages;$i++){?>
+                <li class="page-item"><a class="page-link" href="index.php?pagetk=<?php echo $i?>"><?php echo $i ?></a></li>
+                <?php } ?>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </nav>

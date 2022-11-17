@@ -5,8 +5,20 @@ function insert_sanpham($name,$category_id,$brand_id,$image,$price,$quantity,$de
     // var_dump($sql);
     // die();
 }
+// function load_sanpham(){
+//     $sql = "SELECT * FROM category,products,brand where  products.brand_id = brand.id_brand and products.category_id=category.id_category order by id_product";
+//     $listsanpham=pdo_query($sql);
+//     return $listsanpham;
+// }
 function load_sanpham(){
-    $sql = "SELECT * FROM category,products,brand where  products.brand_id = brand.id_brand and products.category_id=category.id_category order by id_product desc";
+    $row = 5;
+    if (isset($_GET['pagepr'])) {
+        $page = $_GET['pagepr'];
+    }else{
+        $page = 1 ; 
+    }
+    $from = ($page - 1) * $row; 
+    $sql = "SELECT * FROM category,products,brand where  products.brand_id = brand.id_brand and products.category_id=category.id_category order by id_product limit $from,$row";
     $listsanpham=pdo_query($sql);
     return $listsanpham;
 }

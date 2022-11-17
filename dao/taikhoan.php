@@ -5,7 +5,14 @@ function insert_taikhoan($fullname,$username,$password,$phone,$email,$address,$r
     // var_dump($sql);
 }
 function load_tk(){
-    $sql = "SELECT * FROM users order by id_user desc";
+    $row = 5;
+    if (isset($_GET['pagetk'])) {
+        $page = $_GET['pagetk'];
+    }else{
+        $page = 1 ; 
+    }
+    $from = ($page - 1) * $row; 
+    $sql = "SELECT * FROM users order by id_user limit $from,$row";
     $listtaikhoan=pdo_query($sql);
     return $listtaikhoan;
 }

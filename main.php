@@ -5,14 +5,18 @@ include './dao/thuonghieu.php';
 include './dao/sanpham.php';
 include './dao/taikhoan.php';
 include './connect.php';
+// include './admin/loai/list-loai.php';
 // include './dao/thong-ke.php';
-// include './dao/binh-luan.php';
+// include './admin/loai/list-loai.php';
+include './dao/binhluan.php';
     if(isset($_GET['act'])){
         $act = $_GET['act'];
+        
         switch ($act) {
         //Thương hiệu 
         case 'thuonghieu':
                 $listbrand = load_all_thuonghieu();
+                // $nav = navigation();
                 include './admin/thuonghieu/list-thuonghieu.php';
                 break;
         case 'add-thuonghieu':
@@ -68,8 +72,9 @@ include './connect.php';
         // Loại
         case 'loai':
                 $listloai = load_all_category();
+                // $nav = navigation();
                 include './admin/loai/list-loai.php';
-                break;
+                break;         
         case 'add-loai':
                 if(isset($_POST['btnAddloai'])){
                         $name_category = $_POST['inputName'];
@@ -281,10 +286,26 @@ include './connect.php';
                 include './admin/donhang/list-donhang.php';
                 break;
         case 'binhluan':
+                $listcomment = load_all_comment();
                 include './admin/binhluan/list-binhluan.php';
-                break;              
-            }
+                break;       
+        default :
+                include './admin/thongke/list-thongke.php';
+        }
+        
+        }else if(isset($_GET['pagel'])){
+                $listloai = load_all_category();
+                include './admin/loai/list-loai.php';
+        }else if(isset($_GET['paget'])){
+                $listbrand = load_all_thuonghieu();
+                include './admin/thuonghieu/list-thuonghieu.php';
+        }else if(isset($_GET['pagetk'])){
+                $listtaikhoan = load_tk();
+                include './admin/taikhoan/list-taikhoan.php';
+        }else if(isset($_GET['pagepr'])){
+                $listsanpham = load_sanpham();
+                include './admin/sanpham/list-sanpham.php';
         }else{
-            include './admin/thongke/list-thongke.php';
+                include './admin/thongke/list-thongke.php';
         }
 ?>

@@ -26,7 +26,7 @@ function delete_tk($id_user){
     pdo_execute($sql);
 }
 function checkuser($ten_dang_nhap,$mat_khau){
-    $sql="SELECT * FROM khach_hang where ten_dang_nhap='".$ten_dang_nhap."'  and  mat_khau='".$mat_khau."' " ;
+    $sql="SELECT * FROM users where username='".$ten_dang_nhap."'  and  password='".$mat_khau."' " ;
     $tk=pdo_query_one($sql); 
     return $tk;
 }
@@ -40,4 +40,10 @@ function checktaikhoan($ten_dang_nhap,$email){
     $tk=pdo_query_one($sql); 
     return $tk;
 }
+function login_user($email,$mat_khau){
+    $sql="SELECT * FROM users where email='".$email."'  and  password='".$mat_khau."' " ;
+    $tk=pdo_query_one($sql); 
+    return $tk;
+}
+
 ?>

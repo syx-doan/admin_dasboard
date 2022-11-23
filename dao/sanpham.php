@@ -37,3 +37,8 @@ function delete_sanpham($id_product){
 //    pdo_execute($sql);
 // //    var_dump($sql);
 // }
+
+function getListProduct(){
+    $sql = "SELECT * FROM products order by discount limit 10";
+    return pdo_query($sql);
+}

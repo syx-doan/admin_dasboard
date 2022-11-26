@@ -2,6 +2,7 @@
 include './helper/helper.php';
 include './dao/pdo.php';
 include './dao/loai.php';
+include './dao/tintuc.php';
 include './dao/thuonghieu.php';
 include './dao/sanpham.php';
 include './dao/taikhoan.php';
@@ -69,8 +70,7 @@ if (isset($_GET['act'])) {
             $listbrand = load_all_thuonghieu();
             include './admin/thuonghieu/list-thuonghieu.php';
             break;
-
-            // Loại
+        // Loại       
         case 'loai':
             $listloai = load_all_category();
             // $nav = navigation();
@@ -277,7 +277,6 @@ if (isset($_GET['act'])) {
                 $query = mysqli_query($connect, $sql);
                 //        $id_product = mysqli_insert_id($connect);
                 // var_dump($sql);die();
-
                 echo '<script>alert("sửa thành công");location="index.php?act=sanpham";</script>';
             }
             break;
@@ -288,6 +287,63 @@ if (isset($_GET['act'])) {
             $listcomment = load_all_comment();
             include './admin/binhluan/list-binhluan.php';
             break;
+        case 'tintuc': 
+            $list_news = load_all_news();
+            include './admin/tintuc/list-tintuc.php';
+            break;
+        case 'add-tintuc':
+            if (isset($_POST['btnAddnews'])) {
+                $title = $_POST['inputTitle'];
+                $image = $_FILES['inputimagenews']['name'];
+                $content = $_POST['inputContent'];
+                $target_dir = "./upload/news/";
+                $target_file = $target_dir . basename($_FILES["inputimagenews"]["name"]);
+                if (move_uploaded_file($_FILES["inputimagenews"]["tmp_name"], $target_file)) {
+                    // echo "The file ". htmlspecialchars( basename( $_FILES["hinh"]["name"])). " has been uploaded.";
+                } else {
+                    // echo "Sorry, there was an error uploading your file.";
+                }
+                insert_news($title,$image,$content);
+                echo '<script>alert("Thêm thành công");location="index.php?act=tintuc";</script>';
+            }
+            include './admin/tintuc/add-tintuc.php';
+            break;
+        case 'suan':
+                if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                    $news = load_one_news($_GET['id']);
+                }
+                // $list_news = load_all_news();
+                include './admin/tintuc/edit-tintuc.php';
+                break;
+        case 'updateNews' :
+            if (isset($_POST['btnAddnews'])) {
+                $id_news = $_POST['id'];
+                $title = $_POST['inputTitle'];
+                $image = $_FILES['inputimagenews']['name'];
+                $content = $_POST['inputContent'];
+                if (isset($_FILES['inputimagenews'])) {
+                    $file = $_FILES['inputimagenews'];
+                    $file_name = $file['name'];
+                    $old_image = $_POST['old_image'];
+                    //        var_dump($file['size']);die();
+                    if (empty($file_name)) {
+                        $image = $old_image;
+                    } else {
+                        move_uploaded_file($file['tmp_name'], './upload/news/' . $file_name);
+                    }
+                }
+                update_news($id_news,$title,$image,$content);
+                echo '<script>alert("Sửa thành công");location="index.php?act=tintuc";</script>';
+            }
+            include './admin/tintuc/add-tintuc.php';
+            break; 
+        case 'xoan': 
+        if(isset($_GET['id']) && ($_GET['id']) > 0 ) {
+            delete_news($_GET['id']);
+        } 
+        $list_news = load_all_news();
+        include './admin/tintuc/list-tintuc.php';
+        break;
         default:
             include './admin/thongke/list-thongke.php';
     }
@@ -303,6 +359,9 @@ if (isset($_GET['act'])) {
 } else if (isset($_GET['pagepr'])) {
     $listsanpham = load_sanpham();
     include './admin/sanpham/list-sanpham.php';
+}else if (isset($_GET['pagett'])) {
+    $list_news = load_all_news();
+    include './admin/tintuc/list-tintuc.php';
 } else {
     include './admin/thongke/list-thongke.php';
 }

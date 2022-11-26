@@ -41,7 +41,7 @@ function checktaikhoan($ten_dang_nhap,$email){
     return $tk;
 }
 function login_user($email,$mat_khau){
-    $sql="SELECT * FROM users where email='".$email."'  and  password='".$mat_khau."' " ;
+    $sql="SELECT fullname, email, address, phone FROM users where email='".$email."'  and  password='".$mat_khau."' " ;
     $tk=pdo_query_one($sql); 
     return $tk;
 }

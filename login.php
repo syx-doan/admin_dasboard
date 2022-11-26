@@ -2,6 +2,8 @@
 session_start();
 require "./dao/pdo.php";
 require "./dao/taikhoan.php";
+
+$message = '';
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -11,7 +13,7 @@ if (isset($_POST['login'])) {
         $_SESSION["user"] = $checktk;
         header("location:index.php");
     } else {
-        echo "tk không có";
+        $message = 'Wrong';
     }
 }
 ?>
@@ -79,6 +81,10 @@ if (isset($_POST['login'])) {
 
                                         </button>
 
+                                        <?php if (!empty($message)) : ?>
+                                            <?= $message ?>
+                                        <?php endif; ?>
+
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
@@ -115,7 +121,15 @@ if (isset($_POST['login'])) {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+        })
+    </script> -->
 </body>
 
 </html>

@@ -184,6 +184,7 @@ if (isset($_GET['act'])) {
                 $price = $_POST['inputPrice'];
                 $quantity = $_POST['inputQuantity'];
                 $description = $_POST['inputDescription'];
+                $sale = $_POST['sale'];
                 if (isset($_FILES['inputImage'])) {
                     $file = $_FILES['inputImage'];
                     $file_name = $file['name'];
@@ -197,7 +198,7 @@ if (isset($_GET['act'])) {
                     }
                 }
                 //  die();
-                $sql = "INSERT INTO products(name,category_id,brand_id,image,price,quantity,description) values('$name','$category_id','$brand_id','$image','$price','$quantity','$description')";
+                $sql = "INSERT INTO products(name,category_id,brand_id,image,price,quantity,description,sale) values('$name','$category_id','$brand_id','$image','$price','$quantity','$description','$sale')";
                 $query = mysqli_query($connect, $sql);
                 $id_product = mysqli_insert_id($connect);
                 //        var_dump($id_product);die();
@@ -240,7 +241,7 @@ if (isset($_GET['act'])) {
                 $price = $_POST['inputPrice'];
                 $quantity = $_POST['inputQuantity'];
                 $description = $_POST['inputDescription'];
-
+                $sale = $_POST['sale'];
                 // echo "<pre>";
                 // print_r($_FILES);
                 // var_dump(empty($_FILES['inputImage']['name']));
@@ -273,7 +274,7 @@ if (isset($_GET['act'])) {
                         }
                     }
                 }
-                $sql = "UPDATE products set name='$name', category_id = '$category_id', brand_id='$brand_id',image='$image',price='$price',quantity='$quantity',description='$description' where id_product=$id_product";
+                $sql = "UPDATE products set name='$name', category_id = '$category_id', brand_id='$brand_id',image='$image',price='$price',quantity='$quantity',description='$description',sale='$sale' where id_product=$id_product";
                 $query = mysqli_query($connect, $sql);
                 //        $id_product = mysqli_insert_id($connect);
                 // var_dump($sql);die();

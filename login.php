@@ -1,8 +1,20 @@
-<?php 
+<?php
+session_start();
+require "./dao/pdo.php";
+require "./dao/taikhoan.php";
+
+$message = '';
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    echo $email . $password;
+    $email . $password;
+    $checktk = checkuser($email, $password);
+    if ($checktk) {
+        $_SESSION["user"] = $checktk;
+        header("location:index.php");
+    } else {
+        $message = 'Wrong';
+    }
 }
 ?>
 
@@ -21,9 +33,7 @@ if (isset($_POST['login'])) {
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -48,19 +58,15 @@ if (isset($_POST['login'])) {
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="d-flex align-items-center mb-3 pb-1">
-                                        <img src="https://cdn.discordapp.com/attachments/1026521114584825916/1028160326153273396/logo-shop-red.png"
-                                            alt="">
+                                        <img src="https://cdn.discordapp.com/attachments/1026521114584825916/1028160326153273396/logo-shop-red.png" alt="">
 
                                     </div>
                                     <form action="login.php" class="user" method="POST">
                                         <div class="form-group">
-                                            <input name="email"type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input name="email" type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input name="password" type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                            <input name="password" type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -69,11 +75,15 @@ if (isset($_POST['login'])) {
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <button type="submit" name="login" class="btn btn-primary btn-user btn-block"> 
-                                          
-                                                Login
-                                            
+                                        <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
+
+                                            Login
+
                                         </button>
+
+                                        <?php if (!empty($message)) : ?>
+                                            <?= $message ?>
+                                        <?php endif; ?>
 
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
@@ -111,7 +121,15 @@ if (isset($_POST['login'])) {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+        })
+    </script> -->
 </body>
 
 </html>

@@ -86,6 +86,10 @@
             <label for="inputAddress">Mô tả</label>
             <textarea class="form-control" name="inputDescription" value="<?=$description?>" required><?=$description?></textarea>
         </div>
+        <div class="form-group">
+            <label for="inputAddress">Ưu đãi (%)</label>
+            <input type="text" class="form-control" name="sale" value="<?=$sale?>">
+        </div>
         <input type="hidden" name="id" value="<?php if(isset($id_product)&&($name!="")) echo $id_product;?>">
         <button type="submit" name="btnUpdateSanpham" class="btn btn-primary">Update</button>
     </form>

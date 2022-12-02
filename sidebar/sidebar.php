@@ -58,7 +58,11 @@
             <i class="fa fa-comment"></i>
             <span>Bình luận</span></a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?act=tintuc">
+            <i class="fa fa-comment"></i>
+            <span>Tin tức</span></a>
+    </li>
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>

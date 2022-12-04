@@ -59,16 +59,15 @@ $sql = mysqli_query($connect, "SELECT * FROM category,products,brand where  prod
                     echo '
                 <tbody>
                     <tr>
-                        <td>' . $id_product . '</td>
-                        <td>' . $name . '</td>
-                        <td>' . $image . '</td>
-                        <td>' . $price . '<sup>vnđ</sup></td>
-                        <td>' . $name_brand . '</td>
-                        <td>' . $name_category . '</td>
-                        <td>' . $quantity . '</td>
-                        <td><button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="' . $description . '">
-                        <i class="fa fa-solid fa-eye"></i>
-                      </button></td>
+                        <td>'.$id_product.'</td>
+                        <td>'.$name.'</td>
+                        <td>'.$image.'</td>
+                        <td>'.$price.'<sup>vnđ</sup></td>
+                        <td>'.$name_brand.'</td>
+                        <td>'.$name_category.'</td>
+                        <td>'.$quantity.'</td>
+                        <td>'.$description.'</td>
+                        <td>'.$sale.'%</td>
                         <td>
                             <a style="color:green ;" href="' . $suasp . '"> <i class="fa fa-pen">sửa</i></a>
                             -

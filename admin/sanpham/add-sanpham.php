@@ -59,6 +59,10 @@
             <label for="inputAddress">Mô tả</label>
             <textarea class="form-control" name="inputDescription" required> </textarea>
         </div>
+        <div class="form-group">
+            <label for="inputAddress">Ưu đãi (%)</label>
+            <input type="text" class="form-control" name="sale" >
+        </div>
         <button type="submit" name="btnAddSanpham" class="btn btn-primary">Thêm</button>
     </form>
 </div>

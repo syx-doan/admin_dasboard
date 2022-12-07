@@ -4,8 +4,10 @@ include './dao/pdo.php';
 include './dao/loai.php';
 include './dao/tintuc.php';
 include './dao/thuonghieu.php';
+include './dao/thongke.php';
 include './dao/sanpham.php';
 include './dao/taikhoan.php';
+include './dao/donhang.php';
 include './connect.php';
 // include './admin/loai/list-loai.php';
 // include './dao/thong-ke.php';
@@ -282,8 +284,17 @@ if (isset($_GET['act'])) {
             }
             break;
         case 'donhang':
+            $list_donhang = load_all_donhang();
+            $tongdongia = tongdongia();
             include './admin/donhang/list-donhang.php';
             break;
+        case 'donhangchitiet': 
+            if (isset($_GET['id'])) {
+                $listdonhangchitiet = load_one_donhang($_GET['id']);
+            }
+            // $list_news = load_all_news();
+            include './admin/donhang/list-donhangchitiet.php';
+            break;    
         case 'binhluan':
             $listcomment = load_all_comment();
             include './admin/binhluan/list-binhluan.php';
@@ -339,9 +350,9 @@ if (isset($_GET['act'])) {
             include './admin/tintuc/add-tintuc.php';
             break; 
         case 'xoan': 
-        if(isset($_GET['id']) && ($_GET['id']) > 0 ) {
-            delete_news($_GET['id']);
-        } 
+            if(isset($_GET['id']) && ($_GET['id']) > 0 ) {
+               delete_news($_GET['id']);
+               } 
         $list_news = load_all_news();
         include './admin/tintuc/list-tintuc.php';
         break;

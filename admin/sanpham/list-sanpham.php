@@ -41,7 +41,7 @@ $sql = mysqli_query($connect,"SELECT * FROM category,products,brand where  produ
                         <th>Thương hiệu</th>
                         <th>Loại</th>
                         <th>Số Lượng</th>
-                        <th>Mô tả</th>
+                        <th>Giảm giá</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -66,7 +66,6 @@ $sql = mysqli_query($connect,"SELECT * FROM category,products,brand where  produ
                         <td>'.$name_brand.'</td>
                         <td>'.$name_category.'</td>
                         <td>'.$quantity.'</td>
-                        <td>'.$description.'</td>
                         <td>'.$sale.'%</td>
                         <td>
                             <a style="color:green ;" href="'.$suasp.'"> <i class="fa fa-pen">sửa</i></a>

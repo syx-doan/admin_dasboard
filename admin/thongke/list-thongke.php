@@ -1,4 +1,25 @@
-              <!-- Content Row -->
+<?php
+// tổng tài khoản
+$users = mysqli_query($connect,"SELECT * from users");
+$totalUser = mysqli_num_rows($users);
+// var_dump($totalUser);
+
+// tổng bình luận
+$comment = mysqli_query($connect,"SELECT * from comment");
+$totalComment = mysqli_num_rows($comment);
+// var_dump($totalComment);
+
+// tổng sản phẩm 
+$products = mysqli_query($connect,"SELECT * from products");
+$totalProducts = mysqli_num_rows($products);
+// var_dump($totalProducts);
+
+// tổng tài khoản
+// $users = mysqli_query($connect,"SELECT * from users");
+// $totalUser = mysqli_num_rows($users);
+// var_dump($totalUserl)
+?>             
+             <!-- Content Row -->
               <div class="row">
 
                   <!-- Tong doanh thu (Monthly) Card Example -->
@@ -8,8 +29,8 @@
                               <div class="row no-gutters align-items-center">
                                   <div class="col mr-2">
                                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                          Tổng doang thu (tháng)</div>
-                                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                          Tổng sản phẩm</div>
+                                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalProducts  ?></div>
                                   </div>
                                   <div class="col-auto">
                                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -26,11 +47,12 @@
                               <div class="row no-gutters align-items-center">
                                   <div class="col mr-2">
                                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                          Tổng doanh thu (năm)</div>
-                                      <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                          Tổng Đơn hàng</div>
+                                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                   </div>
                                   <div class="col-auto">
-                                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                  <!-- <i class="fa fa-dolly"></i> -->
+                                      <i class="fa fa-dolly fa-2x text-gray-300"></i>
                                   </div>
                               </div>
                           </div>
@@ -43,12 +65,13 @@
                           <div class="card-body">
                               <div class="row no-gutters align-items-center">
                                   <div class="col mr-2">
-                                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tổng đơn
-                                          hàng
+                                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tổng tài khoản
                                       </div>
                                       <div class="row no-gutters align-items-center">
                                           <div class="col-auto">
-                                              <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">111</div>
+                                                 
+                                              <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $totalUser ?></div>
+
                                           </div>
                                           <div class="col">
                                               <!-- <div class="progress progress-sm mr-2">
@@ -75,7 +98,7 @@
                                   <div class="col mr-2">
                                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                           Tổng bình luận</div>
-                                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalComment ?></div>
                                   </div>
                                   <div class="col-auto">
                                       <i class="fas fa-comments fa-2x text-gray-300"></i>

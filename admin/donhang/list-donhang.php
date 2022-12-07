@@ -1,3 +1,27 @@
+<?php
+$donhang = mysqli_query($connect,"SELECT * from bill");
+$totaldongia =  mysqli_query($connect,"SELECT * FROM bill,bill_dentail where  bill.id_bill = bill_dentail.id_bill order by price");
+
+// 1 tính tổng bảng ghi của bảng
+// $total = mysqli_num_rows($donhang);
+// var_dump($total);
+
+// 2 thiết lập số bảng ghi trong 1 trang
+// $row = 5;
+
+// 3 tính số trang
+// $pages = ceil($total/$row);
+// var_dump($pages);
+
+// if (isset($_GET['pagepr'])) {
+//     $page = $_GET['pagepr'];
+// }else{
+//     $page = 1 ; 
+// }
+// $from = ($pages - 1) * $row; 
+// $sql = mysqli_query($connect,"SELECT * FROM bill");
+?>
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Đơn Hàng</h6>
@@ -23,39 +47,33 @@
                     <tr>
                         <th>Mã Đơn</th>
                         <th>Người Đặt Hàng</th>
-                        <th>Hình Thực Thanh Toán</th>
                         <th>Trạng Thái</th>
-                        <th>Cập Nhật Trạng Thái</th>
+                        <th>Tổng giá</th>
                         <th>Xem Chi Tiết</th>
                     </tr>
                 </thead>
-
-                <tbody>
-                    <tr>
-                        <td>123</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>216</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>
-                            <a style="color:red ;" href=""> <i class="fa fa-trash"> xóa</i></a>
-                            -
-                            <a style="color:green ;" href=""> <i class="fa fa-pen">sửa</i></a>
-                        </td>
-                    </tr>
-                </tbody>
+                <?php foreach($list_donhang as $donhang) {
+                extract($donhang);
+                $donhangchitiet="index.php?act=donhangchitiet&id=".$id_bill;
+                echo '
+                     <tbody>
+                           <tr>
+                              <td>'.$id_bill.'</td>
+                              <td>'.$fullname.'</td>
+                              <td>
+                                  <select name="" id="">
+                                  <option value="">Đang duyệt đơn</option>
+                                  <option value="">Đang giao</option>
+                                  <option value="">Hủy đơn</option>
+                                  </select>
+                              </td>
+                              <td>100</td>
+                              <td>
+                              <a style="" href="'.$donhangchitiet.'"> <i class="fa fa-eye">Xem chi tiết</i></a>
+                              </td>
+                          </tr>
+                     </tbody>';
+                   } ?>
             </table>
         </div>
         <nav aria-label="Page navigation example " class="float-right">

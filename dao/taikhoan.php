@@ -16,6 +16,12 @@ function load_tk(){
     $listtaikhoan=pdo_query($sql);
     return $listtaikhoan;
 }
+ function load_all_tk()
+{
+    $sql = "SELECT * FROM users";
+    $lisAlltaikhoan = pdo_query($sql);
+    return $lisAlltaikhoan;
+}
 function load_one_tk($id_user){
     $sql="SELECT * FROM users where id_user=".$id_user;
     $taikhoan=pdo_query_one($sql);

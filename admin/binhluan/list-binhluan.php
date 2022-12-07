@@ -19,6 +19,7 @@
                 </thead>
                 <?php foreach($listcomment as $comment){
                     extract($comment);
+                    $xoabl="index.php?act=xoabl&id=".$id_comment;
                     echo '
                     <tbody>
                     <tr>
@@ -28,7 +29,7 @@
                         <td>'.$ngaybinhluan.'</td>
                         <td>'.$comment.'</td>
                         <td>
-                            <a href=""> <i class="fa fa-toggle-on">Ẩn</i></a>
+                            <a href="'.$xoabl.'"> <i class="fa fa-trash"> xóa</i></a>
                         </td>
                     </tr>
                 </tbody>

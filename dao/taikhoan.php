@@ -51,5 +51,15 @@ function login_user($email,$mat_khau){
     $tk=pdo_query_one($sql); 
     return $tk;
 }
+function registerAcount($fullname, $email, $password, $username){
+    $sql="INSERT INTO users(fullname,email, password, username,role) values('$fullname','$email','$password', '$username',0)";
+    pdo_execute($sql);
+}
+
+function checkAccoutnExist($email, $username) {
+    $sql="SELECT * FROM users where email='".$email."' OR username='". $username ."'" ;
+    $tk=pdo_query_one($sql); 
+    return $tk;
+}
 
 ?>

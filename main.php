@@ -285,15 +285,32 @@ if (isset($_GET['act'])) {
             break;
         case 'donhang':
             $list_donhang = load_all_donhang();
-            $tongdongia = tongdongia();
             include './admin/donhang/list-donhang.php';
             break;
+        case 'xemchitiet':
+            if (isset($_GET['id'])) {
+                $loadtrangthaidonhang = load_trangthaidonhang($_GET['id']);
+            }
+            include './admin/donhang/edit-donhang.php';
+            break;
+            case 'updatetrangthai':
+                if (isset($_POST['btnUpdatetrangthai'])) {
+                    $id_bill = $_POST['id_bill'];
+                    $id_user = $_POST['id_user'];
+                    $fullname = $_POST['inputName'];
+                    $status = $_POST['inputTrangthai'];
+                    $address = $_POST['inputAddress'];
+                updateTrangthai($id_bill, $id_user, $fullname, $status, $address);
+                    echo '<script>alert("Update thành công");location="index.php?act=donhang";</script>';
+                }
+                break;
         case 'donhangchitiet': 
             if (isset($_GET['id'])) {
                 $listdonhangchitiet = load_one_donhang($_GET['id']);
             }
             // $list_news = load_all_news();
-            include './admin/donhang/list-donhangchitiet.php';
+            $layprice =  layprice($_GET['id']);              
+             include './admin/donhang/list-donhangchitiet.php';
             break;    
         case 'binhluan':
             $listcomment = load_all_comment();

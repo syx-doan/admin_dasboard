@@ -14,10 +14,10 @@ $products = mysqli_query($connect,"SELECT * from products");
 $totalProducts = mysqli_num_rows($products);
 // var_dump($totalProducts);
 
-// tổng tài khoản
-// $users = mysqli_query($connect,"SELECT * from users");
-// $totalUser = mysqli_num_rows($users);
-// var_dump($totalUserl)
+// tổng đơn hàng
+$bill = mysqli_query($connect,"SELECT * from bill");
+$totalBill = mysqli_num_rows($bill);
+// var_dump($totalBill)
 ?>             
              <!-- Content Row -->
               <div class="row">
@@ -48,7 +48,7 @@ $totalProducts = mysqli_num_rows($products);
                                   <div class="col mr-2">
                                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                           Tổng Đơn hàng</div>
-                                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalBill ?></div>
                                   </div>
                                   <div class="col-auto">
                                   <!-- <i class="fa fa-dolly"></i> -->

@@ -1,6 +1,10 @@
 <?php
-$donhang = mysqli_query($connect,"SELECT * from bill");
-$totaldongia =  mysqli_query($connect,"SELECT * FROM bill,bill_dentail where  bill.id_bill = bill_dentail.id_bill order by price");
+
+
+
+
+$donhang = mysqli_query($connect, "SELECT * from bill");
+$totaldongia = mysqli_query($connect, "SELECT * FROM bill,bill_dentail where  bill.id_bill = bill_dentail.id_bill order by price");
 
 // 1 tính tổng bảng ghi của bảng
 // $total = mysqli_num_rows($donhang);
@@ -45,35 +49,43 @@ $totaldongia =  mysqli_query($connect,"SELECT * FROM bill,bill_dentail where  bi
             <table class="table table-bordered" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Mã Đơn</th>
-                        <th>Người Đặt Hàng</th>
-                        <th>Trạng Thái</th>
-                        <th>Tổng giá</th>
-                        <th>Xem Chi Tiết</th>
+                        <th>Mã đơn</th>
+                        <th>Người đặt hàng</th>
+                        <th>Trạng thái</th>
+                        <th>Xem chi tiết đơn hàng</th>
                     </tr>
                 </thead>
-                <?php foreach($list_donhang as $donhang) {
-                extract($donhang);
-                $donhangchitiet="index.php?act=donhangchitiet&id=".$id_bill;
-                echo '
+                <?php foreach ($list_donhang as $donhang) {
+                    extract($donhang);
+                    if ($status == 0) {
+                        $status = 'đang duyệt';
+                    }else if($status == 1) {
+                        $status = 'đang giao';
+                    
+                    }else{
+                        $status ='Hủy đơn';
+                    
+                    }
+                    $donhangchitiet = "index.php?act=donhangchitiet&id=" . $id_bill;
+                    $xemtrangthai = "index.php?act=xemchitiet&id=" . $id_bill;
+
+                    echo '
+                <form action="index.php?act=updatedh" method="post" enctype="multipart/form-data">
                      <tbody>
                            <tr>
-                              <td>'.$id_bill.'</td>
-                              <td>'.$fullname.'</td>
-                              <td>
-                                  <select name="" id="">
-                                  <option value="">Đang duyệt đơn</option>
-                                  <option value="">Đang giao</option>
-                                  <option value="">Hủy đơn</option>
-                                  </select>
+                              <td>' . $id_bill . '</td>
+                              <td>' . $fullname . '</td>
+                              <td class="d-flex justify-content-between;">
+                                 <p class="gow-1">'.$status.'</p>
+                                  <a  href="'.$xemtrangthai.'" class="ml-5">Xem trạng thái</a>
                               </td>
-                              <td>100</td>
                               <td>
-                              <a style="" href="'.$donhangchitiet.'"> <i class="fa fa-eye">Xem chi tiết</i></a>
+                              <a style="" href="' . $donhangchitiet . '"> <i class="fa fa-eye">Xem chi tiết </i></a>
                               </td>
                           </tr>
-                     </tbody>';
-                   } ?>
+                     </tbody>
+                     </form>';
+                } ?>
             </table>
         </div>
         <nav aria-label="Page navigation example " class="float-right">

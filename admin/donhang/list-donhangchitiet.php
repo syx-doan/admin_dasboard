@@ -1,4 +1,9 @@
-<?php 
+<?php
+// if (is_array($listdonhangchitiet)) {
+//     extract($listdonhangchitiet);
+
+// }
+// $totalPrice+=$pricen;
 
 
 ?>
@@ -33,25 +38,33 @@
                         <th>Giá</th>
                     </tr>
                 </thead>
-                <?php 
-        foreach($listdonhangchitiet as $donhangchitiet){
-         extract($donhangchitiet);
-          echo 
-          '
-          <tbody>
-          <tr>
-              <td>'.$id_bill.'</td>
-              <td>'.$id_product.'</td>
-              <td>'.$total.'</td>
-              <td>'.$price.' vnđ</td>
-              <!-- <td>
-                  <a style="" href="list-donhangchitiet.php"> <i class="fa fa-eye">Quay lai</i></a>
-              </td> -->
-          </tr>
-      </tbody>
-          ';
-        }?>
-    
+                <?php
+                if (!function_exists('currency_format')) {
+                    function currency_format($number, $suffix = '.vnđ') {
+                        if (!empty($number)) {
+                            return number_format($number, 0, ',', '.') . "{$suffix}";
+                        }
+                    }
+                }
+                $totalP = 0;
+                foreach ($listdonhangchitiet as $donhangchitiet) {
+                    extract($donhangchitiet);
+                    $pricen=$price * $total;
+                    $totalP += $pricen;
+                    echo '
+            <tbody>
+                <tr>
+                  <td>' . $id_bill . '</td>
+                  <td>' . $id_product . '</td>
+                  <td>' . $total . '</td>
+                  <td>' . currency_format($pricen) . '</td>
+                </tr>
+            </tbody>';
+                }
+                ?>
+                <tr>
+                    <td>Tổng giá: <?php echo currency_format($totalP)?></td>
+                </tr>
             </table>
         </div>
         <nav aria-label="Page navigation example " class="float-right">

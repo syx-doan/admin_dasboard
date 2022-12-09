@@ -1,29 +1,25 @@
 <?php
 
-
-
-
 $donhang = mysqli_query($connect, "SELECT * from bill");
-$totaldongia = mysqli_query($connect, "SELECT * FROM bill,bill_dentail where  bill.id_bill = bill_dentail.id_bill order by price");
 
 // 1 tính tổng bảng ghi của bảng
-// $total = mysqli_num_rows($donhang);
+$total = mysqli_num_rows($donhang);
 // var_dump($total);
 
 // 2 thiết lập số bảng ghi trong 1 trang
-// $row = 5;
+$row = 5;
 
 // 3 tính số trang
-// $pages = ceil($total/$row);
+$pages = ceil($total/$row);
 // var_dump($pages);
 
-// if (isset($_GET['pagepr'])) {
-//     $page = $_GET['pagepr'];
-// }else{
-//     $page = 1 ; 
-// }
-// $from = ($pages - 1) * $row; 
-// $sql = mysqli_query($connect,"SELECT * FROM bill");
+if (isset($_GET['pagedh'])) {
+    $page = $_GET['pagedh'];
+}else{
+    $page = 1 ; 
+}
+$from = ($pages - 1) * $row; 
+$sql = mysqli_query($connect,"SELECT * FROM $from,$row");
 ?>
 
 <div class="card shadow mb-4">
@@ -32,7 +28,7 @@ $totaldongia = mysqli_query($connect, "SELECT * FROM bill,bill_dentail where  bi
         <div>
             <button class="btn btn-primary mt-2">Thêm</button>
             <form class="pl-5 d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
+                <!-- <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
@@ -40,7 +36,7 @@ $totaldongia = mysqli_query($connect, "SELECT * FROM bill,bill_dentail where  bi
                             <i class="fas fa-search fa-sm"></i>
                         </button>
                     </div>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>
@@ -80,7 +76,7 @@ $totaldongia = mysqli_query($connect, "SELECT * FROM bill,bill_dentail where  bi
                                   <a  href="'.$xemtrangthai.'" class="ml-5">Xem trạng thái</a>
                               </td>
                               <td>
-                              <a style="" href="' . $donhangchitiet . '"> <i class="fa fa-eye">Xem chi tiết </i></a>
+                              <a style="" href="' . $donhangchitiet . '"><i class="fa fa-eye">Xem chi tiết </i></a>
                               </td>
                           </tr>
                      </tbody>
@@ -91,9 +87,11 @@ $totaldongia = mysqli_query($connect, "SELECT * FROM bill,bill_dentail where  bi
         <nav aria-label="Page navigation example " class="float-right">
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <?php for ($i = 1; $i <= $pages; $i++) { ?>
+                <li class="page-item"><a class="page-link" href="index.php?pagedh=<?php echo $i ?>">
+                        <?php echo $i ?>
+                    </a></li>
+                <?php } ?>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </nav>

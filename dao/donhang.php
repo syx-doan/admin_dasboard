@@ -1,6 +1,13 @@
 <?php 
 function load_all_donhang(){
-    $sql = "SELECT * from bill";
+    $row = 5;
+    if (isset($_GET['pagedh'])) {
+        $page = $_GET['pagedh'];
+    }else{
+        $page = 1 ; 
+    }
+    $from = ($page - 1) * $row; 
+    $sql = "SELECT * from bill limit $from,$row";
     $loadAllDonhang = pdo_query($sql);
     return $loadAllDonhang;
 }

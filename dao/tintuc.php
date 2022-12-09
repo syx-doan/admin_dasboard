@@ -8,7 +8,7 @@ function delete_news($id_news){
     pdo_execute($sql);
 }
 function load_all_news() {
-    $row = 2;
+    $row = 5;
     if (isset($_GET['pagett'])) {
         $page = $_GET['pagett'];
     }else{

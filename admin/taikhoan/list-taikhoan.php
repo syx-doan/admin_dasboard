@@ -28,7 +28,7 @@ $sql = mysqli_query($connect,"SELECT * from users order by id_user  limit $from,
         <div>
             <a href="index.php?act=add-taikhoan"><button class="btn btn-primary mt-2">Thêm</button></a>
             <form action="index.php?act=search" method="POST" class="pl-5 d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
+                <!-- <div class="input-group">
                     <input type="text" name="kyw" class="form-control bg-light border-0 small" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
@@ -36,7 +36,7 @@ $sql = mysqli_query($connect,"SELECT * from users order by id_user  limit $from,
                             <i class="fas fa-search fa-sm"></i>
                         </button>
                     </div>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>

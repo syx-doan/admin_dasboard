@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label for="inputimageth">Content</label>
-            <textarea name="inputContent" class="form-control" id="" cols="30" rows="10" value=""><?=$title?></textarea>
+            <textarea name="inputContent" class="form-control" id="" cols="30" rows="10" value=""><?=$content?></textarea>
         </div>
 
         <input type="hidden" name="id" value="<?php if(isset($id_news)&&($content!="")) echo $id_news;?>">

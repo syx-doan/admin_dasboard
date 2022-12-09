@@ -5,7 +5,7 @@ $total = mysqli_num_rows($news);
 // var_dump($total);
 
 // 2 thiết lập số bảng ghi trong 1 trang
-$row = 2;
+$row = 5;
 
 // 3 tính số trang
 $pages = ceil($total/$row);

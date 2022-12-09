@@ -17,7 +17,7 @@ if (isset($_GET['act'])) {
     $act = $_GET['act'];
 
     switch ($act) {
-            //Thương hiệu 
+        //Thương hiệu 
         case 'thuonghieu':
             $listbrand = load_all_thuonghieu();
             // $nav = navigation();
@@ -110,7 +110,7 @@ if (isset($_GET['act'])) {
             include './admin/loai/list-loai.php';
             break;
 
-            // Tài khoản
+        // Tài khoản
         case 'taikhoan':
             $listtaikhoan = load_tk();
             include './admin/taikhoan/list-taikhoan.php';
@@ -172,7 +172,7 @@ if (isset($_GET['act'])) {
             break;
 
 
-            // sản phẩm
+        // sản phẩm
         case 'sanpham':
             $listsanpham = load_sanpham();
             include './admin/sanpham/list-sanpham.php';
@@ -293,30 +293,44 @@ if (isset($_GET['act'])) {
             }
             include './admin/donhang/edit-donhang.php';
             break;
-            case 'updatetrangthai':
-                if (isset($_POST['btnUpdatetrangthai'])) {
-                    $id_bill = $_POST['id_bill'];
-                    $id_user = $_POST['id_user'];
-                    $fullname = $_POST['inputName'];
-                    $status = $_POST['inputTrangthai'];
-                    $address = $_POST['inputAddress'];
+        case 'updatetrangthai':
+            if (isset($_POST['btnUpdatetrangthai'])) {
+                $id_bill = $_POST['id_bill'];
+                $id_user = $_POST['id_user'];
+                $fullname = $_POST['inputName'];
+                $status = $_POST['inputTrangthai'];
+                $address = $_POST['inputAddress'];
                 updateTrangthai($id_bill, $id_user, $fullname, $status, $address);
-                    echo '<script>alert("Update thành công");location="index.php?act=donhang";</script>';
-                }
-                break;
-        case 'donhangchitiet': 
+                echo '<script>alert("Update thành công");location="index.php?act=donhang";</script>';
+            }
+            break;
+        case 'donhangchitiet':
             if (isset($_GET['id'])) {
                 $listdonhangchitiet = load_one_donhang($_GET['id']);
             }
             // $list_news = load_all_news();
-            $layprice =  layprice($_GET['id']);              
-             include './admin/donhang/list-donhangchitiet.php';
-            break;    
+            $layprice = layprice($_GET['id']);
+            include './admin/donhang/list-donhangchitiet.php';
+            break;
         case 'binhluan':
-            $listcomment = load_all_comment();
+            $listcomment = load_bl(0);
             include './admin/binhluan/list-binhluan.php';
             break;
-        case 'tintuc': 
+        case 'binhluanchitiet':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $loadblct = load_blct($_GET['id']);
+            }
+
+            include './admin/binhluan/list-binhluanchitiet.php';
+            break;
+        case 'xoabl':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_bl($_GET['id']);
+            }
+            echo '<script>alert("Xóa thành công");location="index.php?act=binhluan";</script>';
+            include './admin/binhluan/list-binhluanchitiet.php';
+            break;
+        case 'tintuc':
             $list_news = load_all_news();
             include './admin/tintuc/list-tintuc.php';
             break;
@@ -332,19 +346,19 @@ if (isset($_GET['act'])) {
                 } else {
                     // echo "Sorry, there was an error uploading your file.";
                 }
-                insert_news($title,$image,$content);
+                insert_news($title, $image, $content);
                 echo '<script>alert("Thêm thành công");location="index.php?act=tintuc";</script>';
             }
             include './admin/tintuc/add-tintuc.php';
             break;
         case 'suan':
-                if (isset($_GET['id']) && ($_GET['id']) > 0) {
-                    $news = load_one_news($_GET['id']);
-                }
-                // $list_news = load_all_news();
-                include './admin/tintuc/edit-tintuc.php';
-                break;
-        case 'updateNews' :
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                $news = load_one_news($_GET['id']);
+            }
+            // $list_news = load_all_news();
+            include './admin/tintuc/edit-tintuc.php';
+            break;
+        case 'updateNews':
             if (isset($_POST['btnAddnews'])) {
                 $id_news = $_POST['id'];
                 $title = $_POST['inputTitle'];
@@ -361,18 +375,18 @@ if (isset($_GET['act'])) {
                         move_uploaded_file($file['tmp_name'], './upload/news/' . $file_name);
                     }
                 }
-                update_news($id_news,$title,$image,$content);
+                update_news($id_news, $title, $image, $content);
                 echo '<script>alert("Sửa thành công");location="index.php?act=tintuc";</script>';
             }
             include './admin/tintuc/add-tintuc.php';
-            break; 
-        case 'xoan': 
-            if(isset($_GET['id']) && ($_GET['id']) > 0 ) {
-               delete_news($_GET['id']);
-               } 
-        $list_news = load_all_news();
-        include './admin/tintuc/list-tintuc.php';
-        break;
+            break;
+        case 'xoan':
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                delete_news($_GET['id']);
+            }
+            $list_news = load_all_news();
+            include './admin/tintuc/list-tintuc.php';
+            break;
         default:
             include './admin/thongke/list-thongke.php';
     }
@@ -388,9 +402,15 @@ if (isset($_GET['act'])) {
 } else if (isset($_GET['pagepr'])) {
     $listsanpham = load_sanpham();
     include './admin/sanpham/list-sanpham.php';
-}else if (isset($_GET['pagett'])) {
+} else if (isset($_GET['pagett'])) {
     $list_news = load_all_news();
     include './admin/tintuc/list-tintuc.php';
+} else if (isset($_GET['pagecmt'])) {
+    $listcomment = load_bl(0);
+    include './admin/binhluan/list-binhluan.php';
+} else if (isset($_GET['pagedh'])) {
+    $list_donhang = load_all_donhang();
+    include './admin/donhang/list-donhang.php';
 } else {
     include './admin/thongke/list-thongke.php';
 }

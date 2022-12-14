@@ -25,8 +25,21 @@ $sql = mysqli_query($connect, "SELECT * FROM category,products,brand where  prod
         <h6 class="m-0 font-weight-bold text-primary">
             Danh Mục Sản Phẩm
         </h6>
-        <div>
+        <div class="d-flex justify-content-between">
             <a href="index.php?act=add-sanpham"><button class="btn btn-primary mt-2">Thêm</button></a>
+            <div>
+                <form action="index.php?act=sanpham" method="get" class=" mr-auto w-200 navbar-search">
+                    <div class="input-group">
+                        <input type="text" name="searchp" class="form-control bg-light border-0 small"
+                            placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" name="ok" value="searchp">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <div class="card-body">
@@ -46,36 +59,83 @@ $sql = mysqli_query($connect, "SELECT * FROM category,products,brand where  prod
                     </tr>
                 </thead>
                 <?php
-                foreach ($listsanpham as $sanpham) {
-                    extract($sanpham);
-                    $xoasp = "index.php?act=xoasp&id=" . $id_product;
-                    $suasp = "index.php?act=suasp&id=" . $id_product;
-                    $img = "./upload/product/" . $image;
-                    if (is_file($img)) {
-                        $image = "<img src='" . $img . "' height='80px'>";
-                    } else {
-                        $image = " <img src='" . $img . "' height='80px'> NO IMAGES";
+                if (!function_exists('currency_format')) {
+                    function currency_format($number, $suffix = '.vnđ') {
+                        if (!empty($number)) {
+                            return number_format($number, 0, ',', '.') . "{$suffix}";
+                        }
                     }
-                    echo '
-                <tbody>
-                    <tr>
-                        <td>'.$id_product.'</td>
-                        <td>'.$name.'</td>
-                        <td>'.$image.'</td>
-                        <td>'.$price.'<sup>vnđ</sup></td>
-                        <td>'.$name_brand.'</td>
-                        <td>'.$name_category.'</td>
-                        <td>'.$quantity.'</td>
-                        <td>'.$sale.'%</td>
-                        <td>
-                            <a style="color:green ;" href="' . $suasp . '"> <i class="fa fa-pen">sửa</i></a>
-                            -
-                            <a style="color:red ;" href="' . $xoasp . '"> <i class="fa fa-trash"> xóa</i></a>
-                        </td>
-                    </tr>
-                </tbody>
-                ';
                 }
+                $conn = mysqli_connect("localhost", "root", "", "do_an_tot_nghiep");
+                if (isset($_GET['searchp']) && !empty($_GET['searchp'])) {
+                    $key = $_GET['searchp'];
+                    $sql = "SELECT * from products inner join category on products.category_id=category.id_category  inner join brand on  products.brand_id = brand.id_brand  where name like '%$key%' or name_category like '%$key%' or name_brand like '%$key%' ";
+                    // $sql = "SELECT * FROM category,products,brand where  products.brand_id = brand.id_brand and products.category_id=category.id_category where like '%$key%' ";
+                    $result = mysqli_query($conn, $sql);
+                    foreach ($result as $r) {
+                        extract($r);
+                        $xoasp = "index.php?act=xoasp&id=" . $id_product;
+                        $suasp = "index.php?act=suasp&id=" . $id_product;
+                        $img = "./upload/product/" . $image;
+                        if (is_file($img)) {
+                            $image = "<img src='" . $img . "' height='80px'>";
+                        } else {
+                            $image = " <img src='" . $img . "' height='80px'> NO IMAGES";
+                        }
+                        echo '
+                    <tbody>
+                        <tr>
+                            <td>' . $id_product . '</td>
+                            <td>' . $name . '</td>
+                            <td>' . $image . '</td>
+                            <td>' . currency_format($price) . '</td>
+                            <td>' . $name_brand . '</td>
+                            <td>' . $name_category . '</td>
+                            <td>' . $quantity . '</td>
+                            <td>' . $sale . '%</td>
+                            <td>
+                                <a style="color:green ;" href="' . $suasp . '"> <i class="fa fa-pen">sửa</i></a>
+                                -
+                                <a style="color:red ;" href="' . $xoasp . '"> <i class="fa fa-trash"> xóa</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    ';
+                    }
+
+                } else {
+                    foreach ($listsanpham as $sanpham) {
+                        extract($sanpham);
+                        $xoasp = "index.php?act=xoasp&id=" . $id_product;
+                        $suasp = "index.php?act=suasp&id=" . $id_product;
+                        $img = "./upload/product/" . $image;
+                        if (is_file($img)) {
+                            $image = "<img src='" . $img . "' height='80px'>";
+                        } else {
+                            $image = " <img src='" . $img . "' height='80px'> NO IMAGES";
+                        }
+                        echo '
+                    <tbody>
+                        <tr>
+                            <td>' . $id_product . '</td>
+                            <td>' . $name . '</td>
+                            <td>' . $image . '</td>
+                            <td>' . currency_format($price) . '</td>
+                            <td>' . $name_brand . '</td>
+                            <td>' . $name_category . '</td>
+                            <td>' . $quantity . '</td>
+                            <td>' . $sale . '%</td>
+                            <td>
+                                <a style="color:green ;" href="' . $suasp . '"> <i class="fa fa-pen">sửa</i></a>
+                                -
+                                <a style="color:red ;" href="' . $xoasp . '"> <i class="fa fa-trash"> xóa</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    ';
+                    }
+                }
+
 
                 ?>
 
@@ -85,19 +145,28 @@ $sql = mysqli_query($connect, "SELECT * FROM category,products,brand where  prod
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                 <?php for ($i = 1; $i <= $pages; $i++) { ?>
-                    <li class="page-item"><a class="page-link" href="index.php?pagepr=<?php echo $i ?>"><?php echo $i ?></a></li>
+                <li class="page-item"><a class="page-link" href="index.php?pagepr=<?php echo $i ?>">
+                        <?php echo $i ?>
+                    </a></li>
                 <?php } ?>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </nav>
     </div>
 </div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 <script>
-    $(function() {
+    $(function () {
         $('[data-toggle="popover"]').popover()
     })
 </script>

@@ -23,7 +23,7 @@
         echo json_encode([
             'data' => false,
             'code' => 100,
-            'message' => 'Login error, email or password wrong'
+            'message' => 'Login error, email hoặc password ko chính xác'
         ]);
         exit();
     }

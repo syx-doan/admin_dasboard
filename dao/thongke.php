@@ -1,9 +1,10 @@
 <?php
-function totalUser()
+function load_quantity_product()
 {
-    $sql = "SELECT * from users";
-    $loadalltaikhoan = pdo_query($sql);
-    return $loadalltaikhoan;
+    $sql = "SELECT * from products";
+    $quantityproducts = pdo_query($sql);
+    // var_dump($quantityproducts);
+    return $quantityproducts;
     
 }
 

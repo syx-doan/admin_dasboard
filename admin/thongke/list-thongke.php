@@ -14,10 +14,20 @@ $products = mysqli_query($connect, "SELECT * from products");
 $totalProducts = mysqli_num_rows($products);
 // var_dump($totalProducts);
 
+// tổng sản phẩm hien co
+$quantityproducts = mysqli_query($connect, "SELECT * from products where quantity");
+// $quantityProducts = mysqli_num_rows($quantityproducts);
+// var_dump($quantityProducts);
+
 // tổng đơn hàng
 $bill = mysqli_query($connect, "SELECT * from bill");
 $totalBill = mysqli_num_rows($bill);
-// var_dump($totalBill)
+// var_dump($totalBill);
+
+// tổng tin tức
+$news = mysqli_query($connect, "SELECT * from news");
+$totalNews = mysqli_num_rows($news);
+var_dump($totalNews);
 ?>
 <!-- Content Row -->
 <div class="row">
@@ -43,7 +53,35 @@ $totalBill = mysqli_num_rows($bill);
             </a>
         </div>
     </div>
-
+    <!-- Tong san pham hien co -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <a href="index.php?act=sanpham">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                               Hàng hiện có trong kho</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                // $quantityproducts = mysqli_query($connect, "SELECT * from products ");
+                                $quantityT = 0;
+                                foreach ($quantityproducts as $quantityTotal) {
+                                    extract($quantityTotal);
+                                    $quantityT += $quantity;
+                                }
+                                echo $quantityT;
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
     <!-- Tong doanh thu (Year) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
@@ -112,6 +150,29 @@ $totalBill = mysqli_num_rows($bill);
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Tong tin tuc -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <a href="index.php?act=tintuc">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Tổng tin tức</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo $totalNews ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa fa-newspaper fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>

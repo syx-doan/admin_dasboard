@@ -47,7 +47,6 @@ $sql = mysqli_query($connect,"SELECT * from users order by id_user  limit $from,
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Tài khoản</th>
                         <th>Mật khẩu</th>
                         <th>Phone</th>
                         <th>Email</th>
@@ -72,7 +71,6 @@ $sql = mysqli_query($connect,"SELECT * from users order by id_user  limit $from,
                     <tr>
                         <td>'.$id_user.'</td>
                         <td>'.$fullname.'</td>
-                        <td>'.$username.'</td>
                         <td>'.$password.'</td>
                         <td>'.$phone.'</td>
                         <td>'.$email.'</td>

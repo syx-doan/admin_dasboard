@@ -14,11 +14,7 @@
             <input type="text" class="form-control" name="inputFullName" value="<?=$fullname?>" required>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Tài khoản</label>
-                <input type="text" class="form-control" name="inputUser" value="<?=$username?>" required>
-            </div>
-            <div class="form-group col-md-6">
+            <div class="form-group">
                 <label for="inputPassword">Mật khẩu</label>
                 <input type="text" class="form-control" name="inputPassword" value="<?=$password?>" required>
             </div>

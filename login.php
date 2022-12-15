@@ -10,11 +10,8 @@ if (isset($_POST['login'])) {
     $email . $password;
     $checktk = checkuser($email, $password);
     if ($checktk) {
-        $_SESSION["user"] = $checktk;
-        if ($_SESSION["user"].['role']) {
-            var_dump($role);
-        }
-        // header("location:index.php");
+        $_SESSION['user'] = $checktk;
+        header("location: index.php");
     } else {
         $message = 'Tài khoản và mật khẩu không đúng ';
     }

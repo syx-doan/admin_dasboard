@@ -8,6 +8,7 @@ include './dao/thongke.php';
 include './dao/sanpham.php';
 include './dao/taikhoan.php';
 include './dao/donhang.php';
+include './dao/slider.php';
 include './connect.php';
 // include './admin/loai/list-loai.php';
 // include './dao/thong-ke.php';
@@ -70,6 +71,62 @@ if (isset($_GET['act'])) {
             $listbrand = load_all_thuonghieu();
             include './admin/thuonghieu/list-thuonghieu.php';
             break;
+        // Slider 
+        case 'add-slider':
+            if (isset($_POST['btnAddSlider'])) {
+                $title = $_POST['inputTitle'];
+                $image = $_FILES['inputImagesl']['name'];
+                $description = $_POST['inputDescription'];
+                $target_dir = "./upload/slider/";
+                $target_file = $target_dir . basename($_FILES["inputImagesl"]["name"]);
+                if (move_uploaded_file($_FILES["inputImagesl"]["tmp_name"], $target_file)) {
+                    // echo "The file ". htmlspecialchars( basename( $_FILES["hinh"]["name"])). " has been uploaded.";
+                } else {
+                    // echo "Sorry, there was an error uploading your file.";
+                }
+                insert_slider($title, $image, $description);
+                echo '<script>alert("Thêm thành công");location="index.php?act=slider";</script>';
+            }
+            include './admin/slider/add-slider.php';
+            break;
+        case 'slider':
+            $listslider = load_all_slider();
+            include './admin/slider/list-slider.php';
+            break;
+        case 'suasl':
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                $slider = load_one_slider($_GET['id']);
+            }
+            // $listbrand = load_all_thuonghieu();
+            include './admin/slider/edit-slider.php';
+            break;
+        case 'xoasl':
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                delete_slider($_GET['id']);
+            }
+            $listslider = load_all_slider();
+            include './admin/slider/list-slider.php';
+            break;
+        case 'updatesl':
+            if (isset($_POST['btnUpdateslider'])) {
+                $id_slider = $_POST['id'];
+                $title = $_POST['inputTitle'];
+                $image = $_FILES['inputImagesl']['name'];
+                $description = $_POST['inputDescription'];
+                $target_dir = "./upload/slider/";
+                $target_file = $target_dir . basename($_FILES["inputImagesl"]["name"]);
+                if (move_uploaded_file($_FILES["inputImagesl"]["tmp_name"], $target_file)) {
+                    // echo "The file ". htmlspecialchars( basename( $_FILES["hinh"]["name"])). " has been uploaded.";
+                } else {
+                    // echo "Sorry, there was an error uploading your file.";
+                }
+                update_slider($id_slider, $title, $image, $description);
+                echo '<script>alert("Update thành công")</script>';
+            }
+            $listslider = load_all_slider();
+            include './admin/slider/list-slider.php';
+            break;
+
         // Loại       
         case 'loai':
             $listloai = load_all_category();
@@ -150,7 +207,7 @@ if (isset($_GET['act'])) {
                 $email = $_POST['inputEmail'];
                 $address = $_POST['inputAddress'];
                 $role = $_POST['inputVaitro'];
-                update_taikhoan($id_user, $fullname,$password, $phone, $email, $address, $role);
+                update_taikhoan($id_user, $fullname, $password, $phone, $email, $address, $role);
                 // var_dump($fullname,$username,$password,$phone,$email,$address,$role);
                 echo '<script>alert("Update thành công")</script>';
             }
@@ -343,7 +400,7 @@ if (isset($_GET['act'])) {
                 } else {
                     // echo "Sorry, there was an error uploading your file.";
                 }
-                insert_news($title, $image, $content, $date) ;
+                insert_news($title, $image, $content, $date);
                 echo '<script>alert("Thêm thành công");location="index.php?act=tintuc";</script>';
             }
             include './admin/tintuc/add-tintuc.php';
@@ -373,7 +430,7 @@ if (isset($_GET['act'])) {
                         move_uploaded_file($file['tmp_name'], './upload/news/' . $file_name);
                     }
                 }
-                update_news($id_news, $title, $image, $content,$date);
+                update_news($id_news, $title, $image, $content, $date);
                 echo '<script>alert("Sửa thành công");location="index.php?act=tintuc";</script>';
             }
             include './admin/tintuc/add-tintuc.php';
@@ -388,16 +445,16 @@ if (isset($_GET['act'])) {
         default:
             include './admin/thongke/list-thongke.php';
     }
-} else if (  (isset($_GET['pagel']))  ) {
+} else if ((isset($_GET['pagel']))) {
     $listloai = load_all_category();
     include './admin/loai/list-loai.php';
-} else if ( (isset($_GET['paget'])) || (isset($_GET['searcht']))  ) {
+} else if ((isset($_GET['paget'])) || (isset($_GET['searcht']))) {
     $listbrand = load_all_thuonghieu();
     include './admin/thuonghieu/list-thuonghieu.php';
 } else if (isset($_GET['pagetk'])) {
     $listtaikhoan = load_tk();
     include './admin/taikhoan/list-taikhoan.php';
-} else if ( (isset($_GET['pagepr'])) || (isset($_GET['searchp']))   ) {
+} else if ((isset($_GET['pagepr'])) || (isset($_GET['searchp']))) {
     $listsanpham = load_sanpham();
     include './admin/sanpham/list-sanpham.php';
 } else if (isset($_GET['pagett'])) {
@@ -409,9 +466,9 @@ if (isset($_GET['act'])) {
 } else if (isset($_GET['pagedh'])) {
     $list_donhang = load_all_donhang();
     include './admin/donhang/list-donhang.php';
-}else if (isset($_GET['search'])){
+} else if (isset($_GET['search'])) {
 
 } else {
-    $quantityproducts=load_quantity_product();
+    $quantityproducts = load_quantity_product();
     include './admin/thongke/list-thongke.php';
 }

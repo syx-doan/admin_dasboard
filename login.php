@@ -11,9 +11,12 @@ if (isset($_POST['login'])) {
     $checktk = checkuser($email, $password);
     if ($checktk) {
         $_SESSION["user"] = $checktk;
-        header("location:index.php");
+        if ($_SESSION["user"].['role']) {
+            var_dump($role);
+        }
+        // header("location:index.php");
     } else {
-        $message = 'Wrong';
+        $message = 'Tài khoản và mật khẩu không đúng ';
     }
 }
 ?>
@@ -33,7 +36,9 @@ if (isset($_POST['login'])) {
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -58,15 +63,20 @@ if (isset($_POST['login'])) {
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="d-flex align-items-center mb-3 pb-1">
-                                        <img src="https://cdn.discordapp.com/attachments/1026521114584825916/1028160326153273396/logo-shop-red.png" alt="">
+                                        <img src="https://cdn.discordapp.com/attachments/1026521114584825916/1028160326153273396/logo-shop-red.png"
+                                            alt="">
 
                                     </div>
                                     <form action="login.php" class="user" method="POST">
                                         <div class="form-group">
-                                            <input name="email" type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <input name="email" type="text" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input name="password" type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                            <input name="password" type="password"
+                                                class="form-control form-control-user" id="exampleInputPassword"
+                                                placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -81,12 +91,12 @@ if (isset($_POST['login'])) {
 
                                         </button>
 
-                                        <?php if (!empty($message)) : ?>
-                                            <?= $message ?>
-                                        <?php endif; ?>
+                                        <?php if (!empty($message)): ?>
+                                        <?= $message ?>
+                                            <?php endif; ?>
 
-                                        <hr>
-                                        <!-- <a href="index.html" class="btn btn-google btn-user btn-block">
+                                            <hr>
+                                            <!-- <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">

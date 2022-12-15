@@ -34,6 +34,8 @@
                     <tr>
                         <th>Mã Đơn</th>
                         <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Ảnh sản phẩm</th>
                         <th>Số lượng</th>
                         <th>Giá</th>
                     </tr>
@@ -51,11 +53,19 @@
                     extract($donhangchitiet);
                     $pricen=$price * $total;
                     $totalP += $pricen;
+                    $img = "./upload/product/" . $image;
+                    if (is_file($img)) {
+                        $image = "<img src='" . $img . "' height='60px'>";
+                    } else {
+                        $image = " <img src='" . $img . "' height='60px'> NO IMAGES";
+                    }
                     echo '
             <tbody>
                 <tr>
                   <td>' . $id_bill . '</td>
                   <td>' . $id_product . '</td>
+                  <td>' . $name . '</td>
+                  <td>' . $image . '</td>
                   <td>' . $total . '</td>
                   <td>' . currency_format($pricen) . '</td>
                 </tr>

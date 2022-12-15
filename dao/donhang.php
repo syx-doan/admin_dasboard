@@ -12,7 +12,7 @@ function load_all_donhang(){
     return $loadAllDonhang;
 }
 function load_one_donhang($id_bill) {
-    $sql="SELECT * FROM bill_dentail  where id_bill=".$id_bill;
+    $sql="SELECT * FROM bill_dentail inner join products on bill_dentail.id_product= products.id_product  where id_bill=".$id_bill;
     $listdonhangchitiet=pdo_query($sql);
     // var_dump($sql);
     return $listdonhangchitiet;

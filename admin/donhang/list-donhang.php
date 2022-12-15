@@ -46,6 +46,7 @@ $sql = mysqli_query($connect,"SELECT * FROM $from,$row");
                     <tr>
                         <th>Mã đơn</th>
                         <th>Người đặt hàng</th>
+                        <th>Ngày đặt hàng</th>
                         <th>Trạng thái</th>
                         <th>Xem chi tiết đơn hàng</th>
                     </tr>
@@ -70,6 +71,7 @@ $sql = mysqli_query($connect,"SELECT * FROM $from,$row");
                            <tr>
                               <td>' . $id_bill . '</td>
                               <td>' . $fullname . '</td>
+                              <td>' . $ngaydathang . '</td>
                               <td class="d-flex justify-content-between;">
                                  <p class="gow-1">'.$status.'</p>
                                   <a  href="'.$xemtrangthai.'" class="ml-5">Xem trạng thái</a>

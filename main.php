@@ -275,8 +275,8 @@ if (isset($_GET['act'])) {
                 $sanpham = mysqli_query($connect, "SELECT * from products where id_product = $id_product");
                 $data = mysqli_fetch_assoc($sanpham);
             }
-            $listloai = load_all_category();
-            $listbrand = load_all_thuonghieu();
+            $listloai = load_all_category_product() ;
+            $listbrand = load_all_thuonghieu_products();
             include './admin/sanpham/edit-sanpham.php';
             break;
         case 'xoasp':

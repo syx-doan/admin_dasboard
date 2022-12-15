@@ -24,7 +24,12 @@ function load_all_category() {
     $list_category =pdo_query($sql);
     return $list_category ;
 }
+function load_all_category_product() {
 
+    $sql = "SELECT * from category order by id_category ";
+    $list_category =pdo_query($sql);
+    return $list_category ;
+}
 function load_one_category($id_category ){
     $sql="SELECT * FROM category where id_category =".$id_category ;
     $id_category=pdo_query_one($sql);

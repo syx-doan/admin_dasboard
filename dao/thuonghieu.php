@@ -25,6 +25,12 @@ function load_all_thuonghieu(){
     $listbrand =pdo_query($sql);
     return $listbrand ;
 }
+function load_all_thuonghieu_products(){
+
+    $sql = "SELECT * FROM brand order by id_brand ";
+    $listbrand =pdo_query($sql);
+    return $listbrand ;
+}
 function load_one_thuonghieu($id_brand){
     $sql="SELECT * FROM brand where id_brand=".$id_brand;
     $brand=pdo_query_one($sql);

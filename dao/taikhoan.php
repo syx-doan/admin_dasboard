@@ -1,6 +1,6 @@
 <?php 
-function insert_taikhoan($fullname,$username,$password,$phone,$email,$address,$role){
-    $sql="INSERT INTO users(fullname,username,password,phone,email,address,role) values('$fullname','$username','$password','$phone','$email','$address','$role')";
+function insert_taikhoan($fullname,$password,$phone,$email,$address,$role){
+    $sql="INSERT INTO users(fullname,password,phone,email,address,role) values('$fullname','$password','$phone','$email','$address','$role')";
     pdo_execute($sql);
     // var_dump($sql);
 }
@@ -16,6 +16,12 @@ function load_tk(){
     $listtaikhoan=pdo_query($sql);
     return $listtaikhoan;
 }
+ function load_all_tk()
+{
+    $sql = "SELECT * FROM users";
+    $lisAlltaikhoan = pdo_query($sql);
+    return $lisAlltaikhoan;
+}
 function load_one_tk($id_user){
     $sql="SELECT * FROM users where id_user=".$id_user;
     $taikhoan=pdo_query_one($sql);
@@ -30,8 +36,8 @@ function checkuser($ten_dang_nhap,$mat_khau){
     $tk=pdo_query_one($sql); 
     return $tk;
 }
-function update_taikhoan($id_user,$fullname,$username,$password,$phone,$email,$address,$role){
-   $sql=" UPDATE users set fullname ='".$fullname."' , username='".$username."' , password='".$password."' ,phone='".$phone."' , email='".$email."', address='".$address."', role='".$role."' where id_user=".$id_user;
+function update_taikhoan($id_user,$fullname,$password,$phone,$email,$address,$role){
+   $sql=" UPDATE users set fullname ='".$fullname."', password='".$password."' ,phone='".$phone."' , email='".$email."', address='".$address."', role='".$role."' where id_user=".$id_user;
    pdo_execute($sql);
 //    var_dump($sql);
 }
@@ -45,5 +51,19 @@ function login_user($email,$mat_khau){
     $tk=pdo_query_one($sql); 
     return $tk;
 }
+function registerAcount($fullname, $email, $password, $username){
+    $sql="INSERT INTO users(fullname,email, password, username,role) values('$fullname','$email','$password', '$username',0)";
+    pdo_execute($sql);
+}
 
+function checkAccoutnExist($email, $username) {
+    $sql="SELECT * FROM users where email='".$email."' OR username='". $username ."'" ;
+    $tk=pdo_query_one($sql); 
+    return $tk;
+}
+function check_role(){
+    $sql = "SELECT role from users";
+    $check_role = pdo_query($sql);
+    return $check_role;
+}
 ?>

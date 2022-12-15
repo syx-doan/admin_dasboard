@@ -60,7 +60,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="index.php?act=tintuc">
-            <i class="fa fa-comment"></i>
+        <i class="fa fa-newspaper"></i>
             <span>Tin tức</span></a>
     </li>
     <div class="text-center d-none d-md-inline">

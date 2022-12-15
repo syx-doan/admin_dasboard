@@ -4,8 +4,10 @@ include './dao/pdo.php';
 include './dao/loai.php';
 include './dao/tintuc.php';
 include './dao/thuonghieu.php';
+include './dao/thongke.php';
 include './dao/sanpham.php';
 include './dao/taikhoan.php';
+include './dao/donhang.php';
 include './connect.php';
 // include './admin/loai/list-loai.php';
 // include './dao/thong-ke.php';
@@ -13,12 +15,10 @@ include './connect.php';
 include './dao/binhluan.php';
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
-
     switch ($act) {
-            //Thương hiệu 
+        //Thương hiệu 
         case 'thuonghieu':
             $listbrand = load_all_thuonghieu();
-            // $nav = navigation();
             include './admin/thuonghieu/list-thuonghieu.php';
             break;
         case 'add-thuonghieu':
@@ -108,7 +108,7 @@ if (isset($_GET['act'])) {
             include './admin/loai/list-loai.php';
             break;
 
-            // Tài khoản
+        // Tài khoản
         case 'taikhoan':
             $listtaikhoan = load_tk();
             include './admin/taikhoan/list-taikhoan.php';
@@ -116,13 +116,12 @@ if (isset($_GET['act'])) {
         case 'add-taikhoan':
             if (isset($_POST['btnAddUser'])) {
                 $fullname = $_POST['inputFullName'];
-                $username = $_POST['inputUser'];
                 $password = $_POST['inputPassword'];
                 $phone = $_POST['inputPhone'];
                 $email = $_POST['inputEmail'];
                 $address = $_POST['inputAddress'];
                 $role = $_POST['inputVaitro'];
-                insert_taikhoan($fullname, $username, $password, $phone, $email, $address, $role);
+                insert_taikhoan($fullname, $password, $phone, $email, $address, $role);
                 echo '<script>alert("Thêm thành công");location="index.php?act=taikhoan";</script>';
             }
             $listtaikhoan = load_tk();
@@ -146,13 +145,12 @@ if (isset($_GET['act'])) {
             if (isset($_POST['btnUpdateUser'])) {
                 $id_user = $_POST['id'];
                 $fullname = $_POST['inputFullName'];
-                $username = $_POST['inputUser'];
                 $password = $_POST['inputPassword'];
                 $phone = $_POST['inputPhone'];
                 $email = $_POST['inputEmail'];
                 $address = $_POST['inputAddress'];
                 $role = $_POST['inputVaitro'];
-                update_taikhoan($id_user, $fullname, $username, $password, $phone, $email, $address, $role);
+                update_taikhoan($id_user, $fullname,$password, $phone, $email, $address, $role);
                 // var_dump($fullname,$username,$password,$phone,$email,$address,$role);
                 echo '<script>alert("Update thành công")</script>';
             }
@@ -170,7 +168,7 @@ if (isset($_GET['act'])) {
             break;
 
 
-            // sản phẩm
+        // sản phẩm
         case 'sanpham':
             $listsanpham = load_sanpham();
             include './admin/sanpham/list-sanpham.php';
@@ -209,8 +207,8 @@ if (isset($_GET['act'])) {
             }
 
 
-            $listloai = load_all_category();
-            $listbrand = load_all_thuonghieu();
+            $listloai = load_all_category_product();
+            $listbrand = load_all_thuonghieu_product();
             include './admin/sanpham/add-sanpham.php';
             break;
         case 'suasp':
@@ -220,8 +218,8 @@ if (isset($_GET['act'])) {
                 $sanpham = mysqli_query($connect, "SELECT * from products where id_product = $id_product");
                 $data = mysqli_fetch_assoc($sanpham);
             }
-            $listloai = load_all_category();
-            $listbrand = load_all_thuonghieu();
+            $listloai = load_all_category_product();
+            $listbrand = load_all_thuonghieu_product();
             include './admin/sanpham/edit-sanpham.php';
             break;
         case 'xoasp':
@@ -282,13 +280,53 @@ if (isset($_GET['act'])) {
             }
             break;
         case 'donhang':
+            $list_donhang = load_all_donhang();
             include './admin/donhang/list-donhang.php';
             break;
+        case 'xemchitiet':
+            if (isset($_GET['id'])) {
+                $loadtrangthaidonhang = load_trangthaidonhang($_GET['id']);
+            }
+            include './admin/donhang/edit-donhang.php';
+            break;
+        case 'updatetrangthai':
+            if (isset($_POST['btnUpdatetrangthai'])) {
+                $id_bill = $_POST['id_bill'];
+                $id_user = $_POST['id_user'];
+                $fullname = $_POST['inputName'];
+                $status = $_POST['inputTrangthai'];
+                $address = $_POST['inputAddress'];
+                updateTrangthai($id_bill, $id_user, $fullname, $status, $address);
+                echo '<script>alert("Update thành công");location="index.php?act=donhang";</script>';
+            }
+            break;
+        case 'donhangchitiet':
+            if (isset($_GET['id'])) {
+                $listdonhangchitiet = load_one_donhang($_GET['id']);
+            }
+            // $list_news = load_all_news();
+            $layprice = layprice($_GET['id']);
+            include './admin/donhang/list-donhangchitiet.php';
+            break;
         case 'binhluan':
-            $listcomment = load_all_comment();
+            $listcomment = load_bl(0);
             include './admin/binhluan/list-binhluan.php';
             break;
-        case 'tintuc': 
+        case 'binhluanchitiet':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $loadblct = load_blct($_GET['id']);
+            }
+
+            include './admin/binhluan/list-binhluanchitiet.php';
+            break;
+        case 'xoabl':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_bl($_GET['id']);
+            }
+            echo '<script>alert("Xóa thành công");location="index.php?act=binhluan";</script>';
+            include './admin/binhluan/list-binhluanchitiet.php';
+            break;
+        case 'tintuc':
             $list_news = load_all_news();
             include './admin/tintuc/list-tintuc.php';
             break;
@@ -297,6 +335,7 @@ if (isset($_GET['act'])) {
                 $title = $_POST['inputTitle'];
                 $image = $_FILES['inputimagenews']['name'];
                 $content = $_POST['inputContent'];
+                $date = $_POST['inputDate'];
                 $target_dir = "./upload/news/";
                 $target_file = $target_dir . basename($_FILES["inputimagenews"]["name"]);
                 if (move_uploaded_file($_FILES["inputimagenews"]["tmp_name"], $target_file)) {
@@ -304,24 +343,25 @@ if (isset($_GET['act'])) {
                 } else {
                     // echo "Sorry, there was an error uploading your file.";
                 }
-                insert_news($title,$image,$content);
+                insert_news($title, $image, $content, $date) ;
                 echo '<script>alert("Thêm thành công");location="index.php?act=tintuc";</script>';
             }
             include './admin/tintuc/add-tintuc.php';
             break;
         case 'suan':
-                if (isset($_GET['id']) && ($_GET['id']) > 0) {
-                    $news = load_one_news($_GET['id']);
-                }
-                // $list_news = load_all_news();
-                include './admin/tintuc/edit-tintuc.php';
-                break;
-        case 'updateNews' :
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                $news = load_one_news($_GET['id']);
+            }
+            // $list_news = load_all_news();
+            include './admin/tintuc/edit-tintuc.php';
+            break;
+        case 'updateNews':
             if (isset($_POST['btnAddnews'])) {
                 $id_news = $_POST['id'];
                 $title = $_POST['inputTitle'];
                 $image = $_FILES['inputimagenews']['name'];
                 $content = $_POST['inputContent'];
+                $date = $_POST['inputDate'];
                 if (isset($_FILES['inputimagenews'])) {
                     $file = $_FILES['inputimagenews'];
                     $file_name = $file['name'];
@@ -333,36 +373,45 @@ if (isset($_GET['act'])) {
                         move_uploaded_file($file['tmp_name'], './upload/news/' . $file_name);
                     }
                 }
-                update_news($id_news,$title,$image,$content);
+                update_news($id_news, $title, $image, $content,$date);
                 echo '<script>alert("Sửa thành công");location="index.php?act=tintuc";</script>';
             }
             include './admin/tintuc/add-tintuc.php';
-            break; 
-        case 'xoan': 
-        if(isset($_GET['id']) && ($_GET['id']) > 0 ) {
-            delete_news($_GET['id']);
-        } 
-        $list_news = load_all_news();
-        include './admin/tintuc/list-tintuc.php';
-        break;
+            break;
+        case 'xoan':
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                delete_news($_GET['id']);
+            }
+            $list_news = load_all_news();
+            include './admin/tintuc/list-tintuc.php';
+            break;
         default:
             include './admin/thongke/list-thongke.php';
     }
-} else if (isset($_GET['pagel'])) {
+} else if (  (isset($_GET['pagel']))  ) {
     $listloai = load_all_category();
     include './admin/loai/list-loai.php';
-} else if (isset($_GET['paget'])) {
+} else if ( (isset($_GET['paget'])) || (isset($_GET['searcht']))  ) {
     $listbrand = load_all_thuonghieu();
     include './admin/thuonghieu/list-thuonghieu.php';
 } else if (isset($_GET['pagetk'])) {
     $listtaikhoan = load_tk();
     include './admin/taikhoan/list-taikhoan.php';
-} else if (isset($_GET['pagepr'])) {
+} else if ( (isset($_GET['pagepr'])) || (isset($_GET['searchp']))   ) {
     $listsanpham = load_sanpham();
     include './admin/sanpham/list-sanpham.php';
-}else if (isset($_GET['pagett'])) {
+} else if (isset($_GET['pagett'])) {
     $list_news = load_all_news();
     include './admin/tintuc/list-tintuc.php';
+} else if (isset($_GET['pagecmt'])) {
+    $listcomment = load_bl(0);
+    include './admin/binhluan/list-binhluan.php';
+} else if (isset($_GET['pagedh'])) {
+    $list_donhang = load_all_donhang();
+    include './admin/donhang/list-donhang.php';
+}else if (isset($_GET['search'])){
+
 } else {
+    $quantityproducts=load_quantity_product();
     include './admin/thongke/list-thongke.php';
 }

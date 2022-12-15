@@ -5,7 +5,7 @@ $total = mysqli_num_rows($news);
 // var_dump($total);
 
 // 2 thiết lập số bảng ghi trong 1 trang
-$row = 2;
+$row = 5;
 
 // 3 tính số trang
 $pages = ceil($total/$row);
@@ -47,6 +47,7 @@ $sql = mysqli_query($connect,"SELECT * from news order by id_news  limit $from,$
                         <th>image</th>
                         <th>Title</th>
                         <th>Content</th>
+                        <th>Ngày đăng</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -67,6 +68,7 @@ $sql = mysqli_query($connect,"SELECT * from news order by id_news  limit $from,$
                         <td>'.$image.'</td>
                         <td>'.$title.'</td>
                         <td>'.$content.'</td>
+                        <td>'.$date.'</td>
                         <td>
                             <a style="color:red ;" href="'.$xoan.'"> <i class="fa fa-trash"> xóa</i></a>
                             -

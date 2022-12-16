@@ -60,7 +60,11 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="index.php?act=slider">
+<<<<<<< HEAD
         <i class="fa fa-sliders" ></i>
+=======
+        <i class="fa fa-tv"></i>
+>>>>>>> 9d0a0959fde62d7acd0ba195a7478c6390865081
             <span>Slide</span></a>
     </li>
     <li class="nav-item">

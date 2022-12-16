@@ -59,22 +59,22 @@ use Carbon\CarbonInterval;
 //     $subdays=Carbon::now('Asia/Ho_Chi_Minh')-> subdays(365)->toDateString();
 // };
 
-$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-$subdays = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+// $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+// $subdays = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
 
-$conn=mysqli_connect("localhost","root","","do_an_tot_nghiep");
+// $conn=mysqli_connect("localhost","root","","do_an_tot_nghiep");
 
 
-$sql = "SELECT * from statistical where ngaydathang BETWEEN '$subdays' and '$now' ORDER BY ngaydathang";
-$sql_query = mysqli_query($conn, $sql);
-while ($val = mysqli_fetch_array($sql_query)) {
-    $chart_data[] = array(
-        'date' => $val['ngaydathang'],
-        'bill' => $val['donhang'],
-        'quantity' => $val['soluongban'],
-        'totalrevenue' => $val['doanhthu'],
-    );
-}
+// $sql = "SELECT * from statistical where ngaydathang BETWEEN '$subdays' and '$now' ORDER BY ngaydathang";
+// $sql_query = mysqli_query($conn, $sql);
+// while ($val = mysqli_fetch_array($sql_query)) {
+//     $chart_data[] = array(
+//         'date' => $val['ngaydathang'],
+//         'bill' => $val['donhang'],
+//         'quantity' => $val['soluongban'],
+//         'totalrevenue' => $val['doanhthu'],
+//     );
+// }
 // echo $data = json_encode($chart_data);
 
 ?>

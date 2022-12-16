@@ -27,3 +27,13 @@
         <button type="submit" name="btnUpdatethuonghieu" class="btn btn-primary">Update</button>
     </form>
 </div>
+
+<p>Thống kê hàng theo: <span id="text-date"></span></p>
+                    <p>
+                        <select name="select-date" id="">
+                            <option value="7ngay">7 ngày</option>
+                            <option value="14ngay">14 ngày</option>
+                            <option value="21ngay">21 ngày</option>
+                            <option value="28ngay">28 ngày</option>
+                        </select>
+                    </p>

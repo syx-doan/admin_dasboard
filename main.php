@@ -10,6 +10,7 @@ include './dao/taikhoan.php';
 include './dao/donhang.php';
 include './dao/slider.php';
 include './connect.php';
+// require('./carbon/autoload.php');
 // include './admin/loai/list-loai.php';
 // include './dao/thong-ke.php';
 // include './admin/loai/list-loai.php';
@@ -176,9 +177,8 @@ if (isset($_GET['act'])) {
                 $password = $_POST['inputPassword'];
                 $phone = $_POST['inputPhone'];
                 $email = $_POST['inputEmail'];
-                $address = $_POST['inputAddress'];
                 $role = $_POST['inputVaitro'];
-                insert_taikhoan($fullname, $password, $phone, $email, $address, $role);
+                insert_taikhoan($fullname, $password, $phone, $email, $role);
                 echo '<script>alert("Thêm thành công");location="index.php?act=taikhoan";</script>';
             }
             $listtaikhoan = load_tk();
@@ -205,9 +205,8 @@ if (isset($_GET['act'])) {
                 $password = $_POST['inputPassword'];
                 $phone = $_POST['inputPhone'];
                 $email = $_POST['inputEmail'];
-                $address = $_POST['inputAddress'];
                 $role = $_POST['inputVaitro'];
-                update_taikhoan($id_user, $fullname, $password, $phone, $email, $address, $role);
+                update_taikhoan($id_user, $fullname, $password, $phone, $email, $role);
                 // var_dump($fullname,$username,$password,$phone,$email,$address,$role);
                 echo '<script>alert("Update thành công")</script>';
             }
@@ -264,8 +263,8 @@ if (isset($_GET['act'])) {
             }
 
 
-            $listloai = load_all_category();
-            $listbrand = load_all_thuonghieu();
+            $listloai = load_all_category_product() ;
+            $listbrand = load_all_thuonghieu_products();
             include './admin/sanpham/add-sanpham.php';
             break;
         case 'suasp':
@@ -469,6 +468,6 @@ if (isset($_GET['act'])) {
 } else if (isset($_GET['search'])) {
 
 } else {
-    $quantityproducts = load_quantity_product();
+    // $quantityproducts = load_quantity_product(); 
     include './admin/thongke/list-thongke.php';
 }

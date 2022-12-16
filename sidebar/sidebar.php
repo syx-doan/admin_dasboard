@@ -60,7 +60,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="index.php?act=slider">
-        <i class="fa-thin fa-sliders-simple"></i>
+        <i class="fa fa-sliders" ></i>
             <span>Slide</span></a>
     </li>
     <li class="nav-item">
@@ -71,4 +71,4 @@
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-</ul>
+</ul>   

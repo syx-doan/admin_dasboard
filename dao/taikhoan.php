@@ -1,6 +1,6 @@
 <?php 
-function insert_taikhoan($fullname,$password,$phone,$email,$address,$role){
-    $sql="INSERT INTO users(fullname,password,phone,email,address,role) values('$fullname','$password','$phone','$email','$address','$role')";
+function insert_taikhoan($fullname,$password,$phone,$email,$role){
+    $sql="INSERT INTO users(fullname,password,phone,email,role) values('$fullname','$password','$phone','$email','$role')";
     pdo_execute($sql);
     // var_dump($sql);
 }
@@ -36,8 +36,8 @@ function checkuser($ten_dang_nhap,$mat_khau){
     $tk=pdo_query_one($sql); 
     return $tk;
 }
-function update_taikhoan($id_user,$fullname,$password,$phone,$email,$address,$role){
-   $sql=" UPDATE users set fullname ='".$fullname."', password='".$password."' ,phone='".$phone."' , email='".$email."', address='".$address."', role='".$role."' where id_user=".$id_user;
+function update_taikhoan($id_user,$fullname,$password,$phone,$email,$role){
+   $sql=" UPDATE users set fullname ='".$fullname."', password='".$password."' ,phone='".$phone."' , email='".$email."', role='".$role."' where id_user=".$id_user;
    pdo_execute($sql);
 //    var_dump($sql);
 }

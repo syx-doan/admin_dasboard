@@ -205,8 +205,6 @@ if (isset($_GET['act'])) {
                 }
                 echo '<script>alert("Thêm thành công");location="index.php?act=sanpham";</script>';
             }
-
-
             $listloai = load_all_category_product();
             $listbrand = load_all_thuonghieu_product();
             include './admin/sanpham/add-sanpham.php';

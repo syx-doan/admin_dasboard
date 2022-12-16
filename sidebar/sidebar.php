@@ -60,19 +60,15 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="index.php?act=slider">
-<<<<<<< HEAD
-        <i class="fa fa-sliders" ></i>
-=======
-        <i class="fa fa-tv"></i>
->>>>>>> 9d0a0959fde62d7acd0ba195a7478c6390865081
+            <i class="fa fa-tv"></i>
             <span>Slide</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="index.php?act=tintuc">
-        <i class="fa fa-newspaper"></i>
+            <i class="fa fa-newspaper"></i>
             <span>Tin tức</span></a>
     </li>
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-</ul>   
+</ul>

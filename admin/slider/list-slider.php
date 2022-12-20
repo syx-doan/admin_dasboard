@@ -47,7 +47,7 @@ $sql = mysqli_query($connect, "SELECT * from slider order by id_slider  limit $f
                     <tr>
                         <th>id</th>
                         <th>Title</th>
-                        <th>Desscript</th>
+                        <th>Desscription</th>
                         <th>image</th>
                         <th>Acction</th>
                     </tr>

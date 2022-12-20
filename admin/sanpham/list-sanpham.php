@@ -3,14 +3,12 @@ $products = mysqli_query($connect, "SELECT * from products");
 
 // 1 tính tổng bảng ghi của bảng
 $total = mysqli_num_rows($products);
-// var_dump($total);
 
 // 2 thiết lập số bảng ghi trong 1 trang
 $row = 5;
 
 // 3 tính số trang
 $pages = ceil($total / $row);
-// var_dump($pages);
 
 if (isset($_GET['pagepr'])) {
     $page = $_GET['pagepr'];
@@ -23,7 +21,7 @@ $sql = mysqli_query($connect, "SELECT * FROM category,products,brand where  prod
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">
-            Danh Mục Sản Phẩm
+            Sản Phẩm
         </h6>
         <div class="d-flex justify-content-between">
             <a href="index.php?act=add-sanpham"><button class="btn btn-primary mt-2">Thêm</button></a>
@@ -70,7 +68,6 @@ $sql = mysqli_query($connect, "SELECT * FROM category,products,brand where  prod
                 if (isset($_GET['searchp']) && !empty($_GET['searchp'])) {
                     $key = $_GET['searchp'];
                     $sql = "SELECT * from products inner join category on products.category_id=category.id_category  inner join brand on  products.brand_id = brand.id_brand  where name like '%$key%' or name_category like '%$key%' or name_brand like '%$key%' ";
-                    // $sql = "SELECT * FROM category,products,brand where  products.brand_id = brand.id_brand and products.category_id=category.id_category where like '%$key%' ";
                     $result = mysqli_query($conn, $sql);
                     foreach ($result as $r) {
                         extract($r);
@@ -154,19 +151,3 @@ $sql = mysqli_query($connect, "SELECT * FROM category,products,brand where  prod
         </nav>
     </div>
 </div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-<script>
-    $(function () {
-        $('[data-toggle="popover"]').popover()
-    })
-</script>

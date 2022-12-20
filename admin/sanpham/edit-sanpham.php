@@ -46,7 +46,6 @@
                 <label class="input-group-text" for="inputThuonghieu">Thương hiệu</label>
             </div>
             <select class="custom-select" name="inputThuonghieu" required>
-                <!-- <option value="">Choose...</option> -->
                 <?php
                foreach($listbrand as $brand){
                 extract($brand);

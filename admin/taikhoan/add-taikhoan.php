@@ -1,13 +1,12 @@
-<?php
-
-
-?>
-
 <div class="card shadow mb-4 p-3">
     <form action="" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="inputAddress">Họ và tên</label>
             <input type="text" class="form-control" name="inputFullName" placeholder="Họ và tên" required>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Hình ảnh</label>
+            <input type="file" class="form-control" name="inputImage" placeholder="Ảnh đại diện" required>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">

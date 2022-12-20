@@ -2,6 +2,12 @@
 if (is_array($taikhoan)) {
     extract($taikhoan);
 }
+$img = "./upload/product/".$image;
+if(is_file($img)){
+    $image = "<img  src='".$img."' height='80px'>";
+  }else{
+    $image ="NO IMAGES";
+  }
 ?>
 <div class="card shadow mb-4 p-3">
     <form action="index.php?act=updatetk" method="post" enctype="multipart/form-data">
@@ -12,6 +18,10 @@ if (is_array($taikhoan)) {
         <div class="form-group">
             <label for="inputAddress">Họ và tên</label>
             <input type="text" class="form-control" name="inputFullName" value="<?= $fullname ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Ảnh đại diện</label>
+            <input type="file" class="form-control" name="inputImage" value="" required><?= $image?>
         </div>
         <div class="form-row">
             <div class="form-group col-6">

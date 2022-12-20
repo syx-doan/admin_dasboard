@@ -29,9 +29,6 @@ $news = mysqli_query($connect, "SELECT * from news");
 $totalNews = mysqli_num_rows($news);
 // var_dump($totalNews);
 
-
-
-
 include './carbon/autoload.php';
 
 // 
@@ -59,22 +56,22 @@ use Carbon\CarbonInterval;
 //     $subdays=Carbon::now('Asia/Ho_Chi_Minh')-> subdays(365)->toDateString();
 // };
 
-// $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-// $subdays = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+$subdays = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
 
-// $conn=mysqli_connect("localhost","root","","do_an_tot_nghiep");
+$conn = mysqli_connect("localhost", "root", "", "do_an_tot_nghiep");
 
 
-// $sql = "SELECT * from statistical where ngaydathang BETWEEN '$subdays' and '$now' ORDER BY ngaydathang";
-// $sql_query = mysqli_query($conn, $sql);
-// while ($val = mysqli_fetch_array($sql_query)) {
-//     $chart_data[] = array(
-//         'date' => $val['ngaydathang'],
-//         'bill' => $val['donhang'],
-//         'quantity' => $val['soluongban'],
-//         'totalrevenue' => $val['doanhthu'],
-//     );
-// }
+$sql = "SELECT * from statistical where ngaydathang BETWEEN '$subdays' and '$now' ORDER BY ngaydathang";
+$sql_query = mysqli_query($conn, $sql);
+while ($val = mysqli_fetch_array($sql_query)) {
+    $chart_data[] = array(
+        'date' => $val['ngaydathang'],
+        'bill' => $val['donhang'],
+        'quantity' => $val['soluongban'],
+        'totalrevenue' => $val['doanhthu'],
+    );
+}
 // echo $data = json_encode($chart_data);
 
 ?>
@@ -231,73 +228,36 @@ use Carbon\CarbonInterval;
 
 <!-- Content Row -->
 <div class="row">
-    <!-- Area Chart -->
-    <div class="col-xl-8 col-lg-7">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                <div class="dropdown no-arrow">
-                    <p>Thống kê hàng theo: <span id="text-date"></span></p>
-                    <p>
-                        </select>
-                        <select class="form-select" aria-label="Default select example" name="select-date">
-                            <option value="7ngay">7 ngày</option>
-                            <option value="14ngay">14 ngày</option>
-                            <option value="21ngay">21 ngày</option>
-                            <option value="28ngay">28 ngày</option>
-                        </select>
-                    </p>
-                </div>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-area">
-                <div id="chart" style="height: 250px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="piechart_3d" style="width: 100%; height: 500px;"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Danh mục', 'Số lượng'],
+                            <?php
+                            $tongdm = count($listthongke);
+                            $i = 1;
+                            foreach ($listthongke as $thongke) {
+                                extract($thongke);
+                                if ($i == $tongdm)
+                                    $dauphay = "";
+                                else
+                                    $dauphay = ",";
+                                echo "['" . $thongke['tenloai'] . "' , " . $thongke['soluong'] . "]" . $dauphay;
+                                $i += 1;
+                            }
+                            ?>
+                        ]);
 
-    <!-- Pie Chart -->
-    <div class="col-xl-4 col-lg-5">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                        aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-            </div>
+            var options = {
+                title: 'THỐNG KÊ HÀNG HÓA THEO LOẠI',
+                is3D: true,
+            };
 
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                </div>
-                <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
+        }
+    </script>
 </div>

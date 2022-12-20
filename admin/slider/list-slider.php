@@ -1,6 +1,5 @@
 <?php
 $slider = mysqli_query($connect, "SELECT * from slider");
-
 // 1 tính tổng bảng ghi của bảng
 $total = mysqli_num_rows($slider);
 

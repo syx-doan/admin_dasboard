@@ -16,7 +16,7 @@ if (isset($_GET['pagedh'])) {
     $page = 1;
 }
 $from = ($pages - 1) * $row;
-$sql = mysqli_query($connect, "SELECT * FROM $from,$row");
+$sql = mysqli_query($connect, "SELECT * FROM bill limit  $from,$row");
 ?>
 
 <div class="card shadow mb-4">

@@ -59,8 +59,13 @@
             <span>Bình luận</span></a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="index.php?act=slider">
+            <i class="fa fa-tv"></i>
+            <span>Slide</span></a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="index.php?act=tintuc">
-        <i class="fa fa-newspaper"></i>
+            <i class="fa fa-newspaper"></i>
             <span>Tin tức</span></a>
     </li>
     <div class="text-center d-none d-md-inline">

@@ -1,8 +1,3 @@
-<?php 
-    // if (is_array($taikhoan)) {
-    //     extract($taikhoan);
-    // }
-?>
 <div class="card shadow mb-4 p-3">
     <form action="" method="post" enctype="multipart/form-data">
         <div class="form-group">
@@ -21,7 +16,6 @@
             <label for="inputDate">Ngày đăng</label>
             <input type="date" name="inputDate">
         </div>
-        <!-- <input type="hidden" name="id" value="<?php if(isset($id_news)&&($content!="")) echo $id_news;?>"> -->
         <button type="submit" name="btnAddnews" class="btn btn-primary">Thêm</button>
     </form>
 </div>

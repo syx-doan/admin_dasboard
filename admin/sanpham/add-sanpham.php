@@ -1,8 +1,3 @@
-<?php 
-
-
-?>
-
 <div class="card shadow mb-4 p-3">
     <form action="" method="post" enctype="multipart/form-data">
         <div class="form-group">

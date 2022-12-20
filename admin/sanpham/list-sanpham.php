@@ -52,7 +52,8 @@ $sql = mysqli_query($connect, "SELECT * FROM category,products,brand where  prod
                         <th>Thương hiệu</th>
                         <th>Loại</th>
                         <th>Số Lượng</th>
-                        <th>Giảm giá</th>
+                        <th>Mô tả</th>
+                        <th>Ưu đãi</th>
                         <th>Action</th>
                     </tr>
                 </thead>

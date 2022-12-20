@@ -1,7 +1,7 @@
 <?php
 function insert_slider($title,$image,$description){
     $sql="INSERT INTO slider(title,image,description) values('$title','$image','$description')";
-    var_dump($sql);
+    // var_dump($sql);;
     // die();
     pdo_execute($sql);
 }

@@ -35,7 +35,7 @@
                     <tr>
                         <th>id</th>
                         <th>Title</th>
-                        <th>Desscript</th>
+                        <th>Desscription</th>
                         <th>image</th>
                         <th>Acction</th>
                     </tr>

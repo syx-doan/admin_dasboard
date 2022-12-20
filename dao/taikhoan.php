@@ -32,7 +32,7 @@ function delete_tk($id_user){
     pdo_execute($sql);
 }
 function checkuser($ten_dang_nhap,$mat_khau){
-    $sql="SELECT * FROM users where email='".$ten_dang_nhap."'  and  password='".$mat_khau."'  " ;
+    $sql="SELECT * FROM users where email='".$ten_dang_nhap."'  and  password='".$mat_khau."' " ;
     $tk=pdo_query_one($sql); 
     return $tk;
 }

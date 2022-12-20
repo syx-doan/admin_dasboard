@@ -262,10 +262,8 @@ if (isset($_GET['act'])) {
                 }
                 echo '<script>alert("Thêm thành công");location="index.php?act=sanpham";</script>';
             }
-
-
-            $listloai = load_all_category();
-            $listbrand = load_all_thuonghieu();
+            $listloai = load_all_category_product();
+            $listbrand = load_all_thuonghieu_product();
             include './admin/sanpham/add-sanpham.php';
             break;
         case 'suasp':
@@ -275,8 +273,8 @@ if (isset($_GET['act'])) {
                 $sanpham = mysqli_query($connect, "SELECT * from products where id_product = $id_product");
                 $data = mysqli_fetch_assoc($sanpham);
             }
-            $listloai = load_all_category_product() ;
-            $listbrand = load_all_thuonghieu_products();
+            $listloai = load_all_category_product();
+            $listbrand = load_all_thuonghieu_product();
             include './admin/sanpham/edit-sanpham.php';
             break;
         case 'xoasp':

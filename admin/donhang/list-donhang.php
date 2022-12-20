@@ -45,6 +45,7 @@ $sql = mysqli_query($connect, "SELECT * FROM $from,$row");
                         <th>Người đặt hàng</th>
                         <th>Ngày đặt hàng</th>
                         <th>Trạng thái</th>
+                        <th>Ghi chú</th>
                         <th>Xem chi tiết đơn hàng</th>
                     </tr>
                 </thead>
@@ -79,6 +80,7 @@ $sql = mysqli_query($connect, "SELECT * FROM $from,$row");
                                      <p class="gow-1">' . $status . '</p>
                                       <a  href="' . $xemtrangthai . '" class="ml-5">Xem trạng thái</a>
                                   </td>
+                                  <td>' . $note . '</td>
                                   <td>
                                   <a style="" href="' . $donhangchitiet . '"><i class="fa fa-eye">Xem chi tiết </i></a>
                                   </td>
@@ -112,6 +114,7 @@ $sql = mysqli_query($connect, "SELECT * FROM $from,$row");
                                      <p class="gow-1">' . $status . '</p>
                                       <a  href="' . $xemtrangthai . '" class="ml-5">Xem trạng thái</a>
                                   </td>
+                                  <td>' . $note . '</td>    
                                   <td>
                                   <a style="" href="' . $donhangchitiet . '"><i class="fa fa-eye">Xem chi tiết </i></a>
                                   </td>

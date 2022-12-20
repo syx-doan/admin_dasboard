@@ -3,14 +3,12 @@ $comment = mysqli_query($connect, "SELECT products.id_product,products.name, COU
 
 // 1 tính tổng bảng ghi của bảng
 $total = mysqli_num_rows($comment);
-// var_dump($total);
 
 // 2 thiết lập số bảng ghi trong 1 trang
 $row = 5;
 
 // 3 tính số trang
 $pages = ceil($total / $row);
-// var_dump($pages);
 
 if (isset($_GET['pagecmt'])) {
     $page = $_GET['pagecmt'];

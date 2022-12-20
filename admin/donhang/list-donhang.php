@@ -1,41 +1,38 @@
 <?php
-
 $donhang = mysqli_query($connect, "SELECT * from bill");
 
 // 1 tính tổng bảng ghi của bảng
 $total = mysqli_num_rows($donhang);
-// var_dump($total);
 
 // 2 thiết lập số bảng ghi trong 1 trang
 $row = 5;
 
 // 3 tính số trang
-$pages = ceil($total/$row);
-// var_dump($pages);
+$pages = ceil($total / $row);
 
 if (isset($_GET['pagedh'])) {
     $page = $_GET['pagedh'];
-}else{
-    $page = 1 ; 
+} else {
+    $page = 1;
 }
-$from = ($pages - 1) * $row; 
-$sql = mysqli_query($connect,"SELECT * FROM $from,$row");
+$from = ($pages - 1) * $row;
+$sql = mysqli_query($connect, "SELECT * FROM $from,$row");
 ?>
 
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Đơn Hàng</h6>
         <div>
-            <button class="btn btn-primary mt-2">Thêm</button>
-            <form class="pl-5 d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <!-- <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">\                        <button class="btn btn-primary" type="button">
+            <form action="index.php?act=donhang" method="get" class=" mr-auto w-200 navbar-search">
+                <div class="input-group">
+                    <input type="text" name="searchdh" class="form-control bg-light border-0 small"
+                        placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" name="ok" value="searchp">
                             <i class="fas fa-search fa-sm"></i>
                         </button>
                     </div>
-                </div> -->
+                </div>
             </form>
         </div>
     </div>
@@ -51,38 +48,79 @@ $sql = mysqli_query($connect,"SELECT * FROM $from,$row");
                         <th>Xem chi tiết đơn hàng</th>
                     </tr>
                 </thead>
-                <?php foreach ($list_donhang as $donhang) {
-                    extract($donhang);
-                    if ($status == 0) {
-                        $status = 'đang duyệt';
-                    }else if($status == 1) {
-                        $status = 'đang giao';
-                    
-                    }else{
-                        $status ='Hủy đơn';
-                    
+                <?php
+                $conn = mysqli_connect("localhost", "root", "", "do_an_tot_nghiep");
+                if (isset($_GET['searchdh']) && !empty($_GET['searchdh'])) {
+                    $key = $_GET['searchdh'];
+                    $sql = "SELECT * from bill  where fullname like '%$key%' or address like '%$key%' ";
+                    $result = mysqli_query($conn, $sql);
+                    foreach ($result as $r) {
+                        extract($r);
+                        if ($status == 0) {
+                            $status = 'đang duyệt';
+                        } else if ($status == 1) {
+                            $status = 'đang giao';
+    
+                        } else {
+                            $status = 'Hủy đơn';
+    
+                        }
+                        $donhangchitiet = "index.php?act=donhangchitiet&id=" . $id_bill;
+                        $xemtrangthai = "index.php?act=xemchitiet&id=" . $id_bill;
+    
+                        echo '
+                    <form action="index.php?act=updatedh" method="post" enctype="multipart/form-data">
+                         <tbody>
+                               <tr>
+                                  <td>' . $id_bill . '</td>
+                                  <td>' . $fullname . '</td>
+                                  <td>' . $ngaydathang . '</td>
+                                  <td class="d-flex justify-content-between;">
+                                     <p class="gow-1">' . $status . '</p>
+                                      <a  href="' . $xemtrangthai . '" class="ml-5">Xem trạng thái</a>
+                                  </td>
+                                  <td>
+                                  <a style="" href="' . $donhangchitiet . '"><i class="fa fa-eye">Xem chi tiết </i></a>
+                                  </td>
+                              </tr>
+                         </tbody>
+                         </form>';
                     }
-                    $donhangchitiet = "index.php?act=donhangchitiet&id=" . $id_bill;
-                    $xemtrangthai = "index.php?act=xemchitiet&id=" . $id_bill;
-
-                    echo '
-                <form action="index.php?act=updatedh" method="post" enctype="multipart/form-data">
-                     <tbody>
-                           <tr>
-                              <td>' . $id_bill . '</td>
-                              <td>' . $fullname . '</td>
-                              <td>' . $ngaydathang . '</td>
-                              <td class="d-flex justify-content-between;">
-                                 <p class="gow-1">'.$status.'</p>
-                                  <a  href="'.$xemtrangthai.'" class="ml-5">Xem trạng thái</a>
-                              </td>
-                              <td>
-                              <a style="" href="' . $donhangchitiet . '"><i class="fa fa-eye">Xem chi tiết </i></a>
-                              </td>
-                          </tr>
-                     </tbody>
-                     </form>';
-                } ?>
+                } else {
+                    foreach ($list_donhang as $donhang) {
+                        extract($donhang);
+                        if ($status == 0) {
+                            $status = 'đang duyệt';
+                        } else if ($status == 1) {
+                            $status = 'đang giao';
+    
+                        } else {
+                            $status = 'Hủy đơn';
+    
+                        }
+                        $donhangchitiet = "index.php?act=donhangchitiet&id=" . $id_bill;
+                        $xemtrangthai = "index.php?act=xemchitiet&id=" . $id_bill;
+    
+                        echo '
+                    <form action="index.php?act=updatedh" method="post" enctype="multipart/form-data">
+                         <tbody>
+                               <tr>
+                                  <td>' . $id_bill . '</td>
+                                  <td>' . $fullname . '</td>
+                                  <td>' . $ngaydathang . '</td>
+                                  <td class="d-flex justify-content-between;">
+                                     <p class="gow-1">' . $status . '</p>
+                                      <a  href="' . $xemtrangthai . '" class="ml-5">Xem trạng thái</a>
+                                  </td>
+                                  <td>
+                                  <a style="" href="' . $donhangchitiet . '"><i class="fa fa-eye">Xem chi tiết </i></a>
+                                  </td>
+                              </tr>
+                         </tbody>
+                         </form>';
+                    } 
+                }
+                ?>
             </table>
         </div>
         <nav aria-label="Page navigation example " class="float-right">

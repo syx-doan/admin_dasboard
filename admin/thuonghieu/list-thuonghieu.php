@@ -1,13 +1,15 @@
 <?php
 $brand = mysqli_query($connect, "SELECT * from brand");
+
 // 1 tính tổng bảng ghi của bảng
 $total = mysqli_num_rows($brand);
-// var_dump($total);
+
 // 2 thiết lập số bảng ghi trong 1 trang
 $row = 5;
+
 // 3 tính số trang
 $pages = ceil($total / $row);
-// var_dump($pages);
+
 if (isset($_GET['paget'])) {
     $page = $_GET['paget'];
 } else {
@@ -57,9 +59,6 @@ $sql = mysqli_query($connect, "SELECT * from brand order by id_brand  limit $fro
                     $sql = "SELECT * from brand where name_brand like '%$key%' ";
                     $result = mysqli_query($conn, $sql);
                     foreach ($result as $r) {
-                        // $id_brand = $row['id_brand'];
-                        // $image_brand = $row['image_brand'];
-                        // $name_brand = $row['name_brand'];
                         extract($r);
                         $xoath = "index.php?act=xoath&id=" . $id_brand;
                         $suath = "index.php?act=suath&id=" . $id_brand;
@@ -81,9 +80,7 @@ $sql = mysqli_query($connect, "SELECT * from brand order by id_brand  limit $fro
                        </td>
                     </tr>
                         ';
-                    }
-                 
-               
+                    }        
                 } else {
                     foreach ($listbrand as $brand) {
                         extract($brand);
@@ -112,16 +109,6 @@ $sql = mysqli_query($connect, "SELECT * from brand order by id_brand  limit $fro
                     }
                 }
                 ?>
-                <!-- <tr>
-                        <td><?php echo $id_brand ?></td>
-                        <td><?php echo $image_brand ?></td>
-                        <td><?php echo $name_brand ?></td>
-                        <td>
-                            <a style="color:green ;" href='index.php?act=suath&id=<?php echo $id_brand?>'> <i class="fa fa-pen">sửa</i></a>
-                            -
-                            <a style="color:red ;" href="' . $xoath . '"> <i class="fa fa-trash"> xóa</i></a>
-                        </td>
-                </tr> -->
             </table>
         </div>
         <nav aria-label="Page navigation example " class="float-right">
